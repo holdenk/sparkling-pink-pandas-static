@@ -2,9 +2,13 @@
   url: https://www.facebook.com/SparklingPinkPandas/
   icon: fab fa-facebook-f
 
-- name: Twitter
-  url: https://twitter.com/spp_scooters
+- name: Twitter / X
+  url: https://x.com/spp_scooters
   icon: fab fa-twitter
+
+- name: Instagram
+  url: https://www.instagram.com/sparklingpinkpandas/
+  icon: fab fa-instagram
 
 - name: YouTube
   url: https://www.youtube.com/channel/UCP71aXbyq56Ynquxq3Gfovw

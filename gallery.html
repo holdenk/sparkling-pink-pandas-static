@@ -20,6 +20,43 @@ permalink: /gallery/
     </div>
   </div>
 
+  <!-- Photo Gallery -->
+  <div class="container section">
+    <h2 class="text-center" style="color: black; margin-bottom: 30px;">Photos</h2>
+
+    {% if site.data.gallery.size > 0 %}
+    <div class="gallery_area">
+      <div class="row">
+        {% for photo in site.data.gallery %}
+        <div class="col-xl-4 col-md-4 col-sm-6" style="margin-bottom: 20px;">
+          <div class="single_photography">
+            <div class="thumb">
+              <a href="{{ photo.image | relative_url }}" class="img-pop-up">
+                <img src="{{ photo.image | relative_url }}" style="height: 250px; object-fit: cover;" alt="{{ photo.caption }}">
+              </a>
+            </div>
+            {% if photo.caption %}
+            <p style="margin-top: 8px; font-size: .9em; color: #666;">{{ photo.caption }}</p>
+            {% endif %}
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    {% else %}
+    <div class="row text-center">
+      <div class="col-12">
+        <p>Photos coming soon! In the meantime, check out our photos on social media:</p>
+        <p>
+          <a href="https://x.com/spp_scooters" target="_blank" rel="noopener" class="btn btn-2" style="font-size: .8em; margin: 5px;"><i class="fab fa-twitter"></i> X / Twitter</a>
+          <a href="https://www.instagram.com/sparklingpinkpandas/" target="_blank" rel="noopener" class="btn btn-2" style="font-size: .8em; margin: 5px;"><i class="fab fa-instagram"></i> Instagram</a>
+          <a href="https://www.facebook.com/SparklingPinkPandas/" target="_blank" rel="noopener" class="btn btn-2" style="font-size: .8em; margin: 5px;"><i class="fab fa-facebook-f"></i> Facebook</a>
+        </p>
+      </div>
+    </div>
+    {% endif %}
+  </div>
+
   <!-- Video Area -->
   <div class="container section">
     <h2 class="text-center" style="color: black; margin-bottom: 30px;">Videos</h2>
@@ -30,16 +67,6 @@ permalink: /gallery/
             <a class="popup-video" href="https://www.youtube.com/watch?v=fGy0Sye3ZUQ"><i class="fas fa-play"></i></a>
           </div>
         </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Photo Gallery -->
-  <div class="container section">
-    <h2 class="text-center" style="color: black; margin-bottom: 30px;">Photos</h2>
-    <div class="row text-center">
-      <div class="col-12">
-        <p>Check out photos from our rides and events on our <a href="https://www.facebook.com/SparklingPinkPandas/" target="_blank" rel="noopener">Facebook Page</a>.</p>
       </div>
     </div>
   </div>

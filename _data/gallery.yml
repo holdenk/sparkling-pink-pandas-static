@@ -1,0 +1,13 @@
+# Gallery images
+# To add images: place them in assets/img/gallery/ and add an entry here.
+# You can download images from https://x.com/spp_scooters and
+# https://www.instagram.com/sparklingpinkpandas/ then add them below.
+#
+# Example:
+# - image: /assets/img/gallery/ride-photo-1.jpg
+#   caption: "Group ride through the Mission"
+#   date: 2023-06-24
+#
+# - image: /assets/img/gallery/pride-2024.jpg
+#   caption: "Pride 2024 with Dykes on Bikes"
+#   date: 2024-06-29
