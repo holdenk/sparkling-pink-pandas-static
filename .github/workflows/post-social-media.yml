@@ -37,9 +37,9 @@ jobs:
 
       - name: Install dependencies
         if: steps.detect.outputs.has_new_events == 'true'
-        run: pip install pyyaml tweepy atproto
+        run: pip install pyyaml tweepy atproto instagrapi
 
-      - name: Post to X (Twitter) and Bluesky
+      - name: Post to X (Twitter), Bluesky, and Instagram
         if: steps.detect.outputs.has_new_events == 'true'
         env:
           # X / Twitter API credentials (OAuth 1.0a)
@@ -50,6 +50,9 @@ jobs:
           # Bluesky credentials
           BSKY_HANDLE: ${{ secrets.BSKY_HANDLE }}
           BSKY_PASSWORD: ${{ secrets.BSKY_PASSWORD }}
+          # Instagram credentials
+          IG_USERNAME: ${{ secrets.IG_USERNAME }}
+          IG_PASSWORD: ${{ secrets.IG_PASSWORD }}
           # Site
           SITE_URL: ${{ vars.SITE_URL || 'https://sparklingpinkpandas.com' }}
           EVENT_FILES: ${{ steps.detect.outputs.files }}
@@ -142,6 +145,61 @@ jobs:
                   print(f"Error posting to Bluesky: {e}")
                   return False
 
+          def post_to_instagram(text):
+              """Post to Instagram using instagrapi.
+
+              Note: Instagram requires an image for every post. This creates
+              a simple branded image with the event text overlay. For best
+              results, add an 'image' field to event front matter and use
+              that instead.
+              """
+              username = os.environ.get("IG_USERNAME")
+              password = os.environ.get("IG_PASSWORD")
+
+              if not all([username, password]):
+                  print("Instagram credentials not configured, skipping.")
+                  return False
+
+              try:
+                  from instagrapi import Client as IGClient
+                  from PIL import Image, ImageDraw, ImageFont
+                  import textwrap
+
+                  # Create a simple branded image for the post
+                  img = Image.new('RGB', (1080, 1080), color=(255, 77, 240))
+                  draw = ImageDraw.Draw(img)
+
+                  # Try to use a system font, fall back to default
+                  try:
+                      font_large = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 48)
+                      font_small = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf", 32)
+                  except Exception:
+                      font_large = ImageFont.load_default()
+                      font_small = ImageFont.load_default()
+
+                  # Draw text
+                  draw.text((540, 200), "Sparkling Pink Pandas", fill="white", font=font_large, anchor="mm")
+                  draw.text((540, 280), "NEW EVENT", fill="white", font=font_small, anchor="mm")
+
+                  # Wrap the post text for the image
+                  wrapped = textwrap.fill(text.split("#")[0].strip(), width=35)
+                  y_pos = 400
+                  for line in wrapped.split("\n")[:10]:
+                      draw.text((540, y_pos), line, fill="white", font=font_small, anchor="mm")
+                      y_pos += 45
+
+                  img_path = "/tmp/event_post.jpg"
+                  img.save(img_path)
+
+                  client = IGClient()
+                  client.login(username, password)
+                  media = client.photo_upload(img_path, caption=text)
+                  print(f"Posted to Instagram: {media.pk}")
+                  return True
+              except Exception as e:
+                  print(f"Error posting to Instagram: {e}")
+                  return False
+
           # Process each new event
           for filepath in event_files:
               filepath = filepath.strip()
@@ -159,5 +217,6 @@ jobs:
 
               post_to_x(text)
               post_to_bluesky(text)
+              post_to_instagram(text)
 
           PYEOF
