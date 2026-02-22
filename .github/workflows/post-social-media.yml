@@ -1,0 +1,163 @@
+name: Post New Event to Social Media
+
+on:
+  push:
+    branches: ["main"]
+    paths:
+      - '_events/**'
+
+jobs:
+  detect-and-post:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Detect new event files
+        id: detect
+        run: |
+          NEW_EVENTS=$(git diff --name-only --diff-filter=A HEAD~1 HEAD -- '_events/*.md' || true)
+          if [ -z "$NEW_EVENTS" ]; then
+            echo "No new events detected."
+            echo "has_new_events=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          echo "has_new_events=true" >> "$GITHUB_OUTPUT"
+          echo "files<<EOF" >> "$GITHUB_OUTPUT"
+          echo "$NEW_EVENTS" >> "$GITHUB_OUTPUT"
+          echo "EOF" >> "$GITHUB_OUTPUT"
+
+      - name: Set up Python
+        if: steps.detect.outputs.has_new_events == 'true'
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        if: steps.detect.outputs.has_new_events == 'true'
+        run: pip install pyyaml tweepy atproto
+
+      - name: Post to X (Twitter) and Bluesky
+        if: steps.detect.outputs.has_new_events == 'true'
+        env:
+          # X / Twitter API credentials (OAuth 1.0a)
+          X_API_KEY: ${{ secrets.X_API_KEY }}
+          X_API_SECRET: ${{ secrets.X_API_SECRET }}
+          X_ACCESS_TOKEN: ${{ secrets.X_ACCESS_TOKEN }}
+          X_ACCESS_SECRET: ${{ secrets.X_ACCESS_SECRET }}
+          # Bluesky credentials
+          BSKY_HANDLE: ${{ secrets.BSKY_HANDLE }}
+          BSKY_PASSWORD: ${{ secrets.BSKY_PASSWORD }}
+          # Site
+          SITE_URL: ${{ vars.SITE_URL || 'https://sparklingpinkpandas.com' }}
+          EVENT_FILES: ${{ steps.detect.outputs.files }}
+        run: |
+          python3 << 'PYEOF'
+          import os, yaml, sys
+
+          event_files = os.environ.get("EVENT_FILES", "").strip().split("\n")
+          site_url = os.environ["SITE_URL"]
+
+          def parse_event(filepath):
+              """Parse an event markdown file and return metadata."""
+              with open(filepath, 'r') as f:
+                  content = f.read()
+              parts = content.split('---', 2)
+              if len(parts) < 3:
+                  return None
+              meta = yaml.safe_load(parts[1])
+              # Build slug from filename
+              filename = os.path.basename(filepath).replace('.md', '')
+              slug = '-'.join(filename.split('-')[3:])
+              meta['url'] = f"{site_url}/events/{slug}/"
+              return meta
+
+          def build_post_text(meta):
+              """Build a social media post from event metadata."""
+              title = meta.get('title', 'New Event')
+              date = str(meta.get('date', ''))
+              time_str = meta.get('time', '')
+              location = meta.get('location', '')
+              url = meta.get('url', '')
+
+              lines = [f"New event: {title}"]
+              date_line = f"Date: {date}"
+              if time_str:
+                  date_line += f" at {time_str}"
+              lines.append(date_line)
+              if location:
+                  lines.append(f"Location: {location}")
+              lines.append("")
+              lines.append(url)
+              lines.append("")
+              lines.append("#SparklingPinkPandas #TransRiders #ScooterLife #SanFrancisco")
+
+              return "\n".join(lines)
+
+          def post_to_x(text):
+              """Post to X/Twitter using tweepy."""
+              api_key = os.environ.get("X_API_KEY")
+              api_secret = os.environ.get("X_API_SECRET")
+              access_token = os.environ.get("X_ACCESS_TOKEN")
+              access_secret = os.environ.get("X_ACCESS_SECRET")
+
+              if not all([api_key, api_secret, access_token, access_secret]):
+                  print("X/Twitter credentials not configured, skipping.")
+                  return False
+
+              try:
+                  import tweepy
+                  client = tweepy.Client(
+                      consumer_key=api_key,
+                      consumer_secret=api_secret,
+                      access_token=access_token,
+                      access_token_secret=access_secret,
+                  )
+                  response = client.create_tweet(text=text)
+                  print(f"Posted to X: {response.data['id']}")
+                  return True
+              except Exception as e:
+                  print(f"Error posting to X: {e}")
+                  return False
+
+          def post_to_bluesky(text):
+              """Post to Bluesky using atproto."""
+              handle = os.environ.get("BSKY_HANDLE")
+              password = os.environ.get("BSKY_PASSWORD")
+
+              if not all([handle, password]):
+                  print("Bluesky credentials not configured, skipping.")
+                  return False
+
+              try:
+                  from atproto import Client
+                  client = Client()
+                  client.login(handle, password)
+                  response = client.send_post(text=text)
+                  print(f"Posted to Bluesky: {response.uri}")
+                  return True
+              except Exception as e:
+                  print(f"Error posting to Bluesky: {e}")
+                  return False
+
+          # Process each new event
+          for filepath in event_files:
+              filepath = filepath.strip()
+              if not filepath or not os.path.exists(filepath):
+                  continue
+
+              meta = parse_event(filepath)
+              if not meta:
+                  continue
+
+              text = build_post_text(meta)
+              print(f"--- Post for: {meta.get('title')} ---")
+              print(text)
+              print("---")
+
+              post_to_x(text)
+              post_to_bluesky(text)
+
+          PYEOF
