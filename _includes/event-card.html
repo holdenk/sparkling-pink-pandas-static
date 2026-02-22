@@ -1,0 +1,30 @@
+<div class="col-lg-4">
+  <article class="blog_item event-card">
+    {% if event.image %}
+    <div class="blog_item_img">
+      <img class="card-img rounded-0" src="{{ event.image | relative_url }}" alt="{{ event.title }}">
+      <a class="blog_item_date">
+        <h3>{{ event.date | date: "%d" }}</h3>
+        <p>{{ event.date | date: "%b" }}</p>
+      </a>
+    </div>
+    {% else %}
+    <div class="blog_item_img" style="background: linear-gradient(135deg, #ff4df0, #ff0099); min-height: 150px; display: flex; align-items: center; justify-content: center; position: relative;">
+      <i class="fas fa-motorcycle" style="font-size: 3em; color: rgba(255,255,255,0.5);"></i>
+      <a class="blog_item_date">
+        <h3>{{ event.date | date: "%d" }}</h3>
+        <p>{{ event.date | date: "%b" }}</p>
+      </a>
+    </div>
+    {% endif %}
+
+    <div class="blog_details">
+      <a class="d-inline-block" href="{{ event.url | relative_url }}">
+        <h2>{{ event.title }}</h2>
+      </a>
+      <p>{{ event.description | default: event.excerpt | strip_html | truncate: 150 }}</p>
+      {% if event.time %}<p><small><i class="fas fa-clock"></i> {{ event.time }}</small></p>{% endif %}
+      {% if event.location %}<p><small><i class="fas fa-map-marker-alt"></i> {{ event.location }}</small></p>{% endif %}
+    </div>
+  </article>
+</div>

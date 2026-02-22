@@ -1,0 +1,82 @@
+---
+layout: default
+---
+
+<main>
+  <!-- Hero Area -->
+  <div class="slider-area">
+    <div class="single-slider slider-height2 d-flex align-items-center slider_area_page">
+      <div class="container">
+        <div class="row">
+          <div class="col-xl-12">
+            <div class="hero-cap text-center">
+              <h2 style="color: white;">{{ page.title }}</h2>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section class="blog_area section-padding">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-12">
+          <article class="blog_item">
+            {% if page.image %}
+            <div class="blog_item_img">
+              <img class="card-img rounded-0" src="{{ page.image | relative_url }}" alt="{{ page.title }}">
+              <a class="blog_item_date">
+                <h3>{{ page.date | date: "%d" }}</h3>
+                <p>{{ page.date | date: "%b" }}</p>
+              </a>
+            </div>
+            {% endif %}
+
+            <div class="blog_details" style="padding: 30px 0;">
+              <h2>{{ page.title }}</h2>
+
+              {% if page.time %}
+              <p><i class="fas fa-clock"></i> {{ page.time }}</p>
+              {% endif %}
+
+              {% if page.location %}
+              <p><i class="fas fa-map-marker-alt"></i> {{ page.location }}</p>
+              {% endif %}
+
+              <div style="margin-top: 20px;">
+                {{ content }}
+              </div>
+            </div>
+          </article>
+
+          <div style="margin-top: 40px;">
+            <a class="btn read-more-btn" href="{{ '/events' | relative_url }}"><b>ALL EVENTS</b></a>
+          </div>
+        </div>
+
+        <div class="col-lg-4">
+          <div class="blog_right_sidebar">
+            <aside class="single_sidebar_widget">
+              <h3 class="widget_title">Upcoming Events</h3>
+              {% assign sorted_events = site.events | sort: 'date' | reverse %}
+              {% for event in sorted_events limit: 5 %}
+              <div class="media post_item">
+                <div class="media-body">
+                  <a href="{{ event.url | relative_url }}"><h3>{{ event.title }}</h3></a>
+                  <p>{{ event.date | date: "%b %d, %Y" }}</p>
+                </div>
+              </div>
+              {% endfor %}
+            </aside>
+
+            <aside class="single_sidebar_widget">
+              <h3 class="widget_title">Subscribe</h3>
+              <p><a href="{{ '/events.ics' | relative_url }}" class="btn btn-2" style="font-size: .8em;"><i class="fas fa-calendar"></i> Add to Calendar</a></p>
+            </aside>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>

@@ -1,0 +1,73 @@
+---
+layout: default
+---
+
+<main>
+  <!-- Hero Area -->
+  <div class="slider-area">
+    <div class="single-slider slider-height2 d-flex align-items-center slider_area_page">
+      <div class="container">
+        <div class="row">
+          <div class="col-xl-12">
+            <div class="hero-cap text-center">
+              <h2 style="color: white;">Blog</h2>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section class="blog_area section-padding">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-12">
+          <div class="blog-posts">
+            <div class="single-post">
+              {% if page.image %}
+              <div class="image-wrapper"><img src="{{ page.image | relative_url }}" alt="{{ page.title }}"></div>
+              {% endif %}
+
+              <div class="icons">
+                <div class="left-area">
+                  <a class="btn caegory-btn"><b style="color: white;">by {{ page.author | default: "Admin" }}</b></a>
+                </div>
+              </div>
+
+              <p class="date"><em>{{ page.date | date: "%A, %B %d, %Y" }}</em></p>
+              <h3 class="title"><b class="light-color">{{ page.title }}</b></h3>
+
+              <div class="post-content" style="margin-top: 20px;">
+                {{ content }}
+              </div>
+            </div>
+          </div>
+
+          <div style="margin-top: 40px;">
+            <a class="btn read-more-btn" href="{{ '/blog' | relative_url }}"><b>BACK TO BLOG</b></a>
+          </div>
+        </div>
+
+        <div class="col-lg-4">
+          <div class="blog_right_sidebar">
+            <aside class="single_sidebar_widget popular_post_widget">
+              <h3 class="widget_title">Recent Posts</h3>
+              {% assign recent_posts = site.posts | limit: 5 %}
+              {% for post in site.posts limit: 5 %}
+              <div class="media post_item">
+                {% if post.image %}
+                <div class="l-post-image"><img src="{{ post.image | relative_url }}" alt="{{ post.title }}"></div>
+                {% endif %}
+                <div class="media-body">
+                  <a href="{{ post.url | relative_url }}"><h3>{{ post.title }}</h3></a>
+                  <p>{{ post.date | date: "%b %d, %Y" }}</p>
+                </div>
+              </div>
+              {% endfor %}
+            </aside>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>

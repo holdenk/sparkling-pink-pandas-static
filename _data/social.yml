@@ -1,0 +1,15 @@
+- name: Facebook
+  url: https://www.facebook.com/SparklingPinkPandas/
+  icon: fab fa-facebook-f
+
+- name: Twitter
+  url: https://twitter.com/spp_scooters
+  icon: fab fa-twitter
+
+- name: YouTube
+  url: https://www.youtube.com/channel/UCP71aXbyq56Ynquxq3Gfovw
+  icon: fab fa-youtube
+
+- name: Google Group
+  url: https://groups.google.com/g/SparklingPinkPandas
+  icon: fab fa-google

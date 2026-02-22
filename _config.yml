@@ -1,0 +1,38 @@
+title: Sparkling Pink Pandas
+description: A trans-focused scooter and motorcycle group in San Francisco CA.
+url: ""
+baseurl: ""
+
+email: sppscooters@gmail.com
+
+collections:
+  events:
+    output: true
+    permalink: /events/:slug/
+
+defaults:
+  - scope:
+      path: ""
+      type: "events"
+    values:
+      layout: "event"
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+    values:
+      layout: "default"
+
+plugins:
+  - jekyll-feed
+
+permalink: /blog/:year/:month/:day/:title/
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - vendor
+  - README.md

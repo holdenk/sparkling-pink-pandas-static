@@ -1,0 +1,68 @@
+<footer>
+  <div class="footer-area footer-padding">
+    <div class="container">
+      <div class="row d-flex justify-content-between">
+
+        <div class="col-xl-4 col-lg-4 col-md-5 col-sm-6">
+          <div class="single-footer-caption mb-50">
+            <div class="single-footer-caption mb-30 text-center">
+              <div class="footer-logo">
+                <a href="{{ '/' | relative_url }}"><img src="{{ '/assets/img/logo.png' | relative_url }}" alt="Sparkling Pink Pandas"></a>
+              </div>
+              <div class="footer-tittle" style="margin-top: -30px;">
+                <div class="footer-pera">
+                  <p>{{ site.description }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-xl-4 col-lg-4 col-md-3 col-sm-5">
+          <div class="single-footer-caption mb-50">
+            <div class="footer-tittle">
+              <h4>Quick Links</h4>
+              <ul>
+                <li><a href="{{ '/about' | relative_url }}">About</a></li>
+                <li><a href="{{ '/events' | relative_url }}">Events</a></li>
+                <li><a href="{{ '/blog' | relative_url }}">Blog</a></li>
+                <li><a href="{{ '/gallery' | relative_url }}">Gallery</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-7">
+          <div class="single-footer-caption mb-50">
+            <div class="footer-tittle">
+              <h4>Get In Touch</h4>
+              <ul>
+                <li><a href="mailto:{{ site.email }}"><i class="fas fa-envelope"></i> {{ site.email }}</a></li>
+                <li><a href="{{ '/events.ics' | relative_url }}"><i class="fas fa-calendar"></i> Subscribe to Events Calendar</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="row align-items-center" style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #333;">
+        <div class="col-xl-7 col-lg-8 col-md-7">
+          <div class="footer-copy-right">
+            <p>Copyright &copy; <script>document.write(new Date().getFullYear());</script> Sparkling Pink Pandas. All rights reserved.</p>
+          </div>
+        </div>
+        <div class="col-xl-5 col-lg-4 col-md-5">
+          <div class="footer-copy-right f-right">
+            <div class="footer-social">
+              {% for social in site.data.social %}
+              <a href="{{ social.url }}" target="_blank" rel="noopener"><i class="{{ social.icon }}"></i></a>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</footer>
