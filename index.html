@@ -1,0 +1,113 @@
+---
+layout: default
+title: Home
+---
+
+<main>
+  <!-- Hero Area -->
+  <div class="slider-area">
+    <div class="single-slider slider-height2 d-flex align-items-center slider_area_hero">
+      <div class="container">
+        <div class="row">
+          <div class="col-xl-12">
+            <div class="hero-cap text-center">
+              <h2 style="color: white;">Home</h2>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Events Section -->
+  <div class="container" style="margin-top: 30px;">
+    <h2 class="text-center" style="color: black;">EVENTS</h2>
+    <div class="row" style="margin-top: 20px;">
+      {% assign sorted_events = site.events | sort: 'date' | reverse %}
+      {% for event in sorted_events limit: 3 %}
+        {% include event-card.html event=event %}
+      {% endfor %}
+    </div>
+    <div class="text-center" style="margin-top: 20px;">
+      <a class="btn btn-2" href="{{ '/events' | relative_url }}">VIEW ALL EVENTS</a>
+    </div>
+  </div>
+
+  <!-- Blog Posts Section -->
+  <section class="blog_area section-padding">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-12">
+          <div class="blog-posts">
+            <div class="content-wrap" style="margin-top: 0px;">
+              <div class="entry-header text-center">
+                <h2 class="entry-title" style="color: black;">POSTS</h2>
+              </div>
+            </div>
+            <br>
+
+            {% for post in site.posts limit: 6 %}
+              {% include post-card.html post=post %}
+            {% endfor %}
+
+            {% if site.posts.size > 6 %}
+            <div class="text-center">
+              <a class="btn read-more-btn" href="{{ '/blog' | relative_url }}"><b>MORE</b></a>
+            </div>
+            {% endif %}
+          </div>
+        </div>
+
+        <div class="col-lg-4">
+          <div class="blog_right_sidebar">
+
+            <aside class="single_sidebar_widget popular_post_widget">
+              <h3 class="widget_title">Recent Posts</h3>
+              {% for post in site.posts limit: 5 %}
+              <div class="media post_item">
+                {% if post.image %}
+                <div class="l-post-image"><img src="{{ post.image | relative_url }}" alt="{{ post.title }}"></div>
+                {% endif %}
+                <div class="media-body">
+                  <a href="{{ post.url | relative_url }}"><h3>{{ post.title }}</h3></a>
+                  <p>{{ post.date | date: "%b %d, %Y" }}</p>
+                </div>
+              </div>
+              {% endfor %}
+            </aside>
+
+            <aside class="single_sidebar_widget">
+              <h3 class="widget_title">Connect</h3>
+              <p>Join us on our social channels and stay connected with the community.</p>
+              <ul style="padding: 0;">
+                {% for social in site.data.social %}
+                <li style="display: block; margin-bottom: 10px;">
+                  <a href="{{ social.url }}" target="_blank" rel="noopener">
+                    <i class="{{ social.icon }}"></i> {{ social.name }}
+                  </a>
+                </li>
+                {% endfor %}
+              </ul>
+            </aside>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Video Area -->
+  <div class="video-area">
+    <div class="container-fluid">
+      <div class="row align-items-center">
+        <div class="col-lg-12">
+          <div class="video-wrap">
+            <div class="play-btn">
+              <a class="popup-video" href="https://www.youtube.com/watch?v=fGy0Sye3ZUQ"><i class="fas fa-play"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>

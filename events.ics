@@ -1,0 +1,21 @@
+---
+layout: null
+---
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Sparkling Pink Pandas//Events//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Sparkling Pink Pandas Events
+X-WR-CALDESC:{{ site.description }}
+{% assign sorted_events = site.events | sort: 'date' | reverse %}{% for event in sorted_events %}
+BEGIN:VEVENT
+DTSTART:{{ event.date | date: "%Y%m%dT%H%M%S" }}
+SUMMARY:{{ event.title | replace: ",", "\," }}
+DESCRIPTION:{{ event.description | default: event.excerpt | strip_html | strip_newlines | replace: ",", "\," }}
+{% if event.location %}LOCATION:{{ event.location | replace: ",", "\," }}
+{% endif %}URL:{{ event.url | absolute_url }}
+UID:{{ event.date | date: "%Y%m%d" }}-{{ event.title | slugify }}@sparklingpinkpandas.com
+END:VEVENT
+{% endfor %}
+END:VCALENDAR

@@ -1,0 +1,105 @@
+---
+layout: default
+title: Events
+permalink: /events/
+---
+
+<main>
+  <!-- Hero Area -->
+  <div class="slider-area">
+    <div class="single-slider slider-height2 d-flex align-items-center slider_area_page">
+      <div class="container">
+        <div class="row">
+          <div class="col-xl-12">
+            <div class="hero-cap text-center">
+              <h2 style="color: white;">Events</h2>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section class="blog_area section-padding">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 mb-5 mb-lg-0">
+          <div class="blog_left_sidebar">
+
+            {% assign sorted_events = site.events | sort: 'date' | reverse %}
+            {% for event in sorted_events %}
+            <article class="blog_item">
+              {% if event.image %}
+              <div class="blog_item_img">
+                <img class="card-img rounded-0" src="{{ event.image | relative_url }}" alt="{{ event.title }}">
+                <a class="blog_item_date">
+                  <h3>{{ event.date | date: "%d" }}</h3>
+                  <p>{{ event.date | date: "%b" }}</p>
+                </a>
+                {% if event.time %}
+                <a style="margin-left: 100px;" class="blog_item_date">
+                  <p>{{ event.time }}</p>
+                </a>
+                {% endif %}
+              </div>
+              {% else %}
+              <div class="blog_item_img" style="background: linear-gradient(135deg, #ff4df0, #ff0099); min-height: 200px; display: flex; align-items: center; justify-content: center; position: relative;">
+                <i class="fas fa-motorcycle" style="font-size: 4em; color: rgba(255,255,255,0.4);"></i>
+                <a class="blog_item_date">
+                  <h3>{{ event.date | date: "%d" }}</h3>
+                  <p>{{ event.date | date: "%b" }}</p>
+                </a>
+              </div>
+              {% endif %}
+
+              <div class="blog_details">
+                <a class="d-inline-block" href="{{ event.url | relative_url }}">
+                  <h2>{{ event.title }}</h2>
+                </a>
+                {{ event.content }}
+                {% if event.location %}
+                <p><small><i class="fas fa-map-marker-alt"></i> {{ event.location }}</small></p>
+                {% endif %}
+              </div>
+            </article>
+            {% endfor %}
+
+            {% if site.events.size == 0 %}
+            <p class="text-center">No events scheduled yet. Check back soon!</p>
+            {% endif %}
+
+          </div>
+        </div>
+
+        <div class="col-lg-4">
+          <div class="blog_right_sidebar">
+
+            <aside class="single_sidebar_widget">
+              <h3 class="widget_title">Subscribe</h3>
+              <p>Add our events to your calendar app:</p>
+              <a href="{{ '/events.ics' | relative_url }}" class="btn btn-2" style="font-size: .8em;">
+                <i class="fas fa-calendar"></i> Subscribe to Calendar
+              </a>
+            </aside>
+
+            <aside class="single_sidebar_widget popular_post_widget">
+              <h3 class="widget_title">Recent Posts</h3>
+              {% for post in site.posts limit: 5 %}
+              <div class="media post_item">
+                {% if post.image %}
+                <div class="l-post-image"><img src="{{ post.image | relative_url }}" alt="{{ post.title }}"></div>
+                {% endif %}
+                <div class="media-body">
+                  <a href="{{ post.url | relative_url }}"><h3>{{ post.title }}</h3></a>
+                  <p>{{ post.date | date: "%b %d, %Y" }}</p>
+                </div>
+              </div>
+              {% endfor %}
+            </aside>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>

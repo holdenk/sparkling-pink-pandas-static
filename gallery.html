@@ -1,0 +1,57 @@
+---
+layout: default
+title: Gallery
+permalink: /gallery/
+---
+
+<main>
+  <!-- Hero Area -->
+  <div class="slider-area">
+    <div class="single-slider slider-height2 d-flex align-items-center slider_area_page">
+      <div class="container">
+        <div class="row">
+          <div class="col-xl-12">
+            <div class="hero-cap text-center">
+              <h2 style="color: white;">Gallery</h2>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Video Area -->
+  <div class="container section">
+    <h2 class="text-center" style="color: black; margin-bottom: 30px;">Videos</h2>
+    <div class="row">
+      <div class="col-lg-8 offset-lg-2">
+        <div class="video-wrap">
+          <div class="play-btn">
+            <a class="popup-video" href="https://www.youtube.com/watch?v=fGy0Sye3ZUQ"><i class="fas fa-play"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Photo Gallery -->
+  <div class="container section">
+    <h2 class="text-center" style="color: black; margin-bottom: 30px;">Photos</h2>
+    <div class="row text-center">
+      <div class="col-12">
+        <p>Check out photos from our rides and events on our <a href="https://www.facebook.com/SparklingPinkPandas/" target="_blank" rel="noopener">Facebook Page</a>.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="container" style="margin-bottom: 60px;">
+    <div class="text-center">
+      <h4 style="margin-bottom: 20px;">Follow Us</h4>
+      <div class="footer-social" style="font-size: 1.5em;">
+        {% for social in site.data.social %}
+        <a href="{{ social.url }}" target="_blank" rel="noopener" style="margin: 0 15px;"><i class="{{ social.icon }}"></i></a>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</main>
