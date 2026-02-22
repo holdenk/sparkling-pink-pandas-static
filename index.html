@@ -21,13 +21,33 @@ title: Home
 
   <!-- Events Section -->
   <div class="container" style="margin-top: 30px;">
-    <h2 class="text-center" style="color: black;">EVENTS</h2>
+    {% assign now = site.time | date: "%Y%m%d" %}
+    {% assign sorted_events = site.events | sort: 'date' | reverse %}
+
+    {% assign upcoming_events = "" | split: "" %}
+    {% for event in sorted_events %}
+      {% assign event_date = event.date | date: "%Y%m%d" %}
+      {% if event_date >= now %}
+        {% assign upcoming_events = upcoming_events | push: event %}
+      {% endif %}
+    {% endfor %}
+
+    {% if upcoming_events.size > 0 %}
+    <h2 class="text-center" style="color: black;">UPCOMING EVENTS</h2>
     <div class="row" style="margin-top: 20px;">
-      {% assign sorted_events = site.events | sort: 'date' | reverse %}
+      {% for event in upcoming_events limit: 3 %}
+        {% include event-card.html event=event %}
+      {% endfor %}
+    </div>
+    {% else %}
+    <h2 class="text-center" style="color: black;">RECENT EVENTS</h2>
+    <div class="row" style="margin-top: 20px;">
       {% for event in sorted_events limit: 3 %}
         {% include event-card.html event=event %}
       {% endfor %}
     </div>
+    {% endif %}
+
     <div class="text-center" style="margin-top: 20px;">
       <a class="btn btn-2" href="{{ '/events' | relative_url }}">VIEW ALL EVENTS</a>
     </div>
