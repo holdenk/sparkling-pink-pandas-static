@@ -10,7 +10,7 @@ layout: default
         <div class="row">
           <div class="col-xl-12">
             <div class="hero-cap text-center">
-              <h2 style="color: white;">{{ page.title }}</h2>
+              <h2>{{ page.title }}</h2>
             </div>
           </div>
         </div>
@@ -33,7 +33,7 @@ layout: default
             </div>
             {% endif %}
 
-            <div class="blog_details" style="padding: 30px 0;">
+            <div class="blog_details blog_details--padded">
               <h2>{{ page.title }}</h2>
 
               {% if page.time %}
@@ -44,13 +44,17 @@ layout: default
               <p><i class="fas fa-map-marker-alt"></i> {{ page.location }}</p>
               {% endif %}
 
-              <div style="margin-top: 20px;">
+              {% if page.map_url %}
+              <p><a href="{{ page.map_url }}" target="_blank" rel="noopener"><i class="fas fa-map"></i> View Route Map</a></p>
+              {% endif %}
+
+              <div class="mt-content">
                 {{ content }}
               </div>
             </div>
           </article>
 
-          <div style="margin-top: 40px;">
+          <div class="mt-back-link">
             <a class="btn read-more-btn" href="{{ '/events' | relative_url }}"><b>ALL EVENTS</b></a>
           </div>
         </div>
@@ -72,7 +76,7 @@ layout: default
 
             <aside class="single_sidebar_widget">
               <h3 class="widget_title">Subscribe</h3>
-              <p><a href="{{ '/events.ics' | relative_url }}" class="btn btn-2" style="font-size: .8em;"><i class="fas fa-calendar"></i> Add to Calendar</a></p>
+              <p><a href="{{ '/events.ics' | relative_url }}" class="btn btn-2 btn--small"><i class="fas fa-calendar"></i> Add to Calendar</a></p>
             </aside>
           </div>
         </div>

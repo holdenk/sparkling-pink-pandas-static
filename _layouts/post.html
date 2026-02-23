@@ -10,7 +10,7 @@ layout: default
         <div class="row">
           <div class="col-xl-12">
             <div class="hero-cap text-center">
-              <h2 style="color: white;">Blog</h2>
+              <h2>Blog</h2>
             </div>
           </div>
         </div>
@@ -30,20 +30,20 @@ layout: default
 
               <div class="icons">
                 <div class="left-area">
-                  <a class="btn caegory-btn"><b style="color: white;">by {{ page.author | default: "Admin" }}</b></a>
+                  <a class="btn caegory-btn"><b class="author-badge">by {{ page.author | default: "Admin" }}</b></a>
                 </div>
               </div>
 
               <p class="date"><em>{{ page.date | date: "%A, %B %d, %Y" }}</em></p>
-              <h3 class="title"><b class="light-color">{{ page.title }}</b></h3>
+              <h3 class="title"><b class="color-dark">{{ page.title }}</b></h3>
 
-              <div class="post-content" style="margin-top: 20px;">
+              <div class="post-content">
                 {{ content }}
               </div>
             </div>
           </div>
 
-          <div style="margin-top: 40px;">
+          <div class="mt-back-link">
             <a class="btn read-more-btn" href="{{ '/blog' | relative_url }}"><b>BACK TO BLOG</b></a>
           </div>
         </div>
@@ -52,7 +52,6 @@ layout: default
           <div class="blog_right_sidebar">
             <aside class="single_sidebar_widget popular_post_widget">
               <h3 class="widget_title">Recent Posts</h3>
-              {% assign recent_posts = site.posts | limit: 5 %}
               {% for post in site.posts limit: 5 %}
               <div class="media post_item">
                 {% if post.image %}

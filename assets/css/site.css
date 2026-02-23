@@ -1,23 +1,20 @@
 /* ==========================================================================
    Sparkling Pink Pandas - Custom Styles
-   Adapted from Django site for Jekyll
    ========================================================================== */
 
 /* ---------------------------------
    1. PRIMARY STYLES
 --------------------------------- */
 
-html { font-size: 100%; height: 100%; overflow-x: hidden; touch-action: manipulation; }
+html { font-size: 100%; height: 100%; overflow-x: hidden; }
 
 body {
   font-size: 15px;
   font-family: 'Roboto', sans-serif;
   width: 100%;
-  height: 100%;
   margin: 0;
   font-weight: 400;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   word-wrap: break-word;
   color: #000;
 }
@@ -43,18 +40,16 @@ h6 { font-size: .9em; letter-spacing: 1px; }
 a, button { display: inline-block; text-decoration: none; color: inherit; transition: all .3s; }
 
 a:focus, a:active, a:hover,
-button:focus, button:active, button:hover,
-a b.light-color:hover { text-decoration: none; color: #ff4df0; }
+button:focus, button:active, button:hover { text-decoration: none; color: #ff4df0; }
 
 b { font-weight: 500; }
 img { width: 100%; }
 li { list-style: none; display: inline-block; }
 span { display: inline-block; }
 button { outline: 0; border: 0; background: none; cursor: pointer; }
-b.light-color { color: #444; }
 
 /* ---------------------------------
-   2. COMMONS FOR PAGE DESIGN
+   2. COMMONS
 --------------------------------- */
 
 .btn {
@@ -70,23 +65,34 @@ b.light-color { color: #444; }
 .btn:hover { color: #ff4df0; background: none; }
 .btn-2 { background: none; color: #ff4df0; }
 .btn-2:hover { background: #ff4df0; color: #fff; }
+.btn--small { font-size: .8em; }
 
 .section { padding: 70px 0 40px; }
 .section .heading { padding-bottom: 70px; }
 .center-text { text-align: center; }
-.color-white { color: #fff; }
-.display-table { display: table; height: 100%; width: 100%; }
-.display-table-cell { display: table-cell; vertical-align: middle; }
 .card { background: transparent; border: 0; }
 .left-area { float: left; }
 .right-area { float: right; }
+
+/* Color utilities */
+.color-white { color: #fff; }
+.color-black { color: #000; }
+.color-dark { color: #333; }
+.color-pink { color: #ff4df0; }
+.color-muted { color: #666; }
+
+/* Spacing utilities */
+.mt-section { margin-top: 30px; }
+.mb-section { margin-bottom: 30px; }
+.mt-content { margin-top: 20px; }
+.mt-back-link { margin-top: 40px; }
 
 /* ---------------------------------
    3. HEADER / MENU
 --------------------------------- */
 
 header {
-  position: fixed;
+  position: relative;
   left: 0;
   right: 0;
   top: 0;
@@ -98,56 +104,42 @@ header {
 
 header .top-menu {
   width: 100%;
-  height: 45px;
-  line-height: 45px;
+  height: 40px;
+  line-height: 40px;
   overflow: hidden;
-  font-size: .95em;
+  font-size: .9em;
   font-style: italic;
 }
 
 header .top-menu ul.welcome-area { padding-left: 20px; }
-header .top-menu ul.welcome-area > li { margin: 0 15px; padding: 0 15px; border-left: 1px solid #ddd; }
+header .top-menu ul.welcome-area > li { margin: 0 10px; padding: 0 10px; border-left: 1px solid #ddd; }
 header .top-menu ul > li:first-child { border-left: 0; }
-header .top-menu ul.social-icons { display: inline-block; padding: 0 35px; color: #aaa; }
-header .top-menu ul.social-icons > li > a { padding: 0 15px; }
-
-/* Search area */
-header .src-area {
-  position: relative;
-  float: left;
-  height: 45px;
-  width: 250px;
-  display: inline-block;
-  border-left: 1px solid #ddd;
-  border-right: 1px solid #ddd;
-  background: #fff;
-}
-
-header .src-area .src-input {
-  position: absolute; top: 0; bottom: 0; left: 0; right: 0;
-  width: 100%; padding: 0 40px 0 20px;
-  background: transparent; border: 0; outline: 0;
-}
+header .top-menu ul.social-icons { display: inline-block; padding: 0 20px; color: #aaa; }
+header .top-menu ul.social-icons > li > a { padding: 0 10px; }
 
 /* Middle area */
 header .middle-menu { border-top: 1px solid #ddd; border-bottom: 1px solid #ddd; }
-header .logo { padding: 30px 0; height: 160px; }
+header .logo { padding: 15px 0; height: 100px; }
 header .logo img { height: 100%; width: auto; }
+
+.site-title { font-size: 20px; color: #000; width: 100%; }
+.site-title .pink { color: rgb(240, 80, 255); }
 
 /* Bottom area / Nav */
 header .bottom-area { text-align: center; }
 header .main-menu { font-weight: 500; }
-header .main-menu > li > a { height: 60px; line-height: 60px; padding: 0 25px; }
+header .main-menu > li > a { height: 50px; line-height: 50px; padding: 0 20px; }
 header .main-menu > li > a:hover { background: #eee; }
 
 .menu-nav-icon {
   display: none;
-  height: 60px;
+  height: 50px;
   width: 50px;
   text-align: center;
-  line-height: 60px;
+  line-height: 50px;
   cursor: pointer;
   font-size: 1.8em;
+  color: rgb(255, 86, 227);
 }
 
 /* ---------------------------------
@@ -159,13 +151,12 @@ header .main-menu > li > a:hover { background: #eee; }
   background-position: center;
 }
 
-.slider-height2 {
-  min-height: 300px;
-}
+.slider-height2 { min-height: 250px; }
 
 .hero-cap h2 {
   font-size: 2.5em;
   font-weight: 700;
+  color: #fff;
 }
 
 .slider_area_hero {
@@ -183,9 +174,7 @@ header .main-menu > li > a:hover { background: #eee; }
 --------------------------------- */
 
 .blog-posts .single-post { margin-bottom: 60px; }
-
 .single-post .icons { overflow: hidden; line-height: 30px; margin: 30px 0 10px; }
-.single-post .icons .caegory-btn { padding: 0 20px; height: 30px; line-height: 30px; }
 .single-post .title { margin: 20px 0 15px; }
 .single-post .date { color: #999; }
 
@@ -204,14 +193,14 @@ header .main-menu > li > a:hover { background: #eee; }
   color: #fff;
 }
 
+.author-badge { color: #fff; }
+.post-content { margin-top: 20px; }
+
 /* ---------------------------------
-   6. BLOG AREA (from theme.css)
+   6. BLOG AREA
 --------------------------------- */
 
-.blog_area { }
-
 .blog_item { margin-bottom: 30px; }
-
 .blog_item_img { position: relative; overflow: hidden; }
 .blog_item_img img { width: 100%; }
 
@@ -227,10 +216,16 @@ header .main-menu > li > a:hover { background: #eee; }
 
 .blog_item_date h3 { margin: 0; color: #fff; font-size: 1.5em; }
 .blog_item_date p { margin: 0; color: #fff; font-size: .9em; }
+.blog_item_date--past { background: #888; }
+.blog_item_date--time { left: auto; margin-left: 100px; }
 
 .blog_details { padding: 20px 0; }
+.blog_details--padded { padding: 30px 0; }
 .blog_details h2 { font-size: 1.5em; margin-bottom: 10px; color: #333; }
 .blog_details p { color: #666; }
+
+/* Content heading */
+.content-heading { color: #000; }
 
 /* Sidebar */
 .blog_right_sidebar .single_sidebar_widget { margin-bottom: 30px; padding: 20px; background: #f9f9f9; }
@@ -248,7 +243,7 @@ header .main-menu > li > a:hover { background: #eee; }
 }
 
 .newsletter_widget .widget_title { color: #fff; border-bottom-color: #fff; }
-.newsletter_widget .form-control { border-radius: 0; }
+.newsletter_widget p { color: #fff; }
 
 .btn_1.boxed-btn {
   background: #ff4df0;
@@ -257,11 +252,11 @@ header .main-menu > li > a:hover { background: #eee; }
   padding: 10px 20px;
   border-radius: 0;
   cursor: pointer;
+  display: inline-block;
+  text-decoration: none;
 }
 
-.btn_1.boxed-btn:hover { background: #e040d0; }
-
-.primary-bg { background: #ff4df0; }
+.btn_1.boxed-btn:hover { background: #e040d0; color: #fff; }
 
 /* Recent posts sidebar */
 .post_item { margin-bottom: 15px; padding-bottom: 15px; border-bottom: 1px solid #eee; }
@@ -278,16 +273,28 @@ header .main-menu > li > a:hover { background: #eee; }
 
 .l-post-image img { height: 100%; object-fit: cover; }
 
+/* Sidebar connect list */
+.connect-list { padding: 0; }
+.connect-list li { display: block; margin-bottom: 10px; }
+
 /* ---------------------------------
    7. GALLERY
 --------------------------------- */
 
 .gallery_area { margin-top: 30px; }
-
 .single_photography { margin-bottom: 0; overflow: hidden; }
 .single_photography .thumb { overflow: hidden; }
 .single_photography .thumb img { transition: all .4s; height: 200px; object-fit: cover; }
 .single_photography .thumb:hover img { transform: scale(1.1); }
+
+.gallery-img { height: 250px; object-fit: cover; }
+.gallery-meta { margin-top: 8px; font-size: .85em; color: #666; }
+.gallery-meta p { margin-bottom: 2px; }
+.gallery-credit { font-style: italic; }
+.gallery-insta-link { color: #999; font-size: .9em; }
+
+.section-subtitle { color: #ff4df0; }
+.section-subtitle a { color: #ff4df0; }
 
 /* ---------------------------------
    8. FOOTER
@@ -299,7 +306,6 @@ header .main-menu > li > a:hover { background: #eee; }
 }
 
 .footer-logo img { width: 100px; }
-
 .footer-pera p { color: white !important; font-size: .95em; }
 
 .footer-tittle h4 { color: white; margin-bottom: 20px; }
@@ -318,6 +324,8 @@ header .main-menu > li > a:hover { background: #eee; }
 }
 
 .footer-social a:hover { color: #ff4df0; }
+
+.footer-bottom { margin-top: 30px; padding-top: 20px; border-top: 1px solid #333; }
 
 /* ---------------------------------
    9. ABOUT PAGE
@@ -362,12 +370,15 @@ header .main-menu > li > a:hover { background: #eee; }
   transform: scale(1.1);
 }
 
+.video-grid { margin-bottom: 30px; }
+
 /* ---------------------------------
    11. EVENT CARDS
 --------------------------------- */
 
 .event-card { margin-bottom: 30px; }
 .event-card .card-img { border-radius: 0; }
+
 .event-date-badge {
   background: #ff4df0;
   color: #fff;
@@ -375,29 +386,78 @@ header .main-menu > li > a:hover { background: #eee; }
   text-align: center;
   display: inline-block;
 }
+
 .event-date-badge h3 { color: #fff; margin: 0; }
 .event-date-badge p { color: #fff; margin: 0; }
 
-/* ---------------------------------
-   12. CONTENT PAGE STYLES
---------------------------------- */
+.event-placeholder-img {
+  background: linear-gradient(135deg, #ff4df0, #ff0099);
+  min-height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
 
-main { margin-top: 270px; }
+.event-placeholder-img--tall { min-height: 200px; }
+
+.event-placeholder-img--past {
+  background: linear-gradient(135deg, #999, #666);
+}
+
+.event-placeholder-icon {
+  font-size: 3em;
+  color: rgba(255,255,255,0.5);
+}
+
+.event-placeholder-icon--lg {
+  font-size: 4em;
+  color: rgba(255,255,255,0.4);
+}
+
+.event-placeholder-icon--past {
+  color: rgba(255,255,255,0.3);
+}
+
+.event-past { opacity: 0.85; }
+
+.events-section-heading {
+  margin-bottom: 30px;
+  color: #333;
+}
+
+.events-past-divider {
+  margin-bottom: 30px;
+  margin-top: 40px;
+  padding-top: 30px;
+  border-top: 2px solid #eee;
+  color: #333;
+}
+
+.events-no-upcoming { margin-bottom: 40px; }
+
+/* ---------------------------------
+   12. CONTENT PAGE
+--------------------------------- */
 
 .page-content { padding: 40px 0; }
 .page-content p { margin-bottom: 15px; }
-
-/* Section padding */
 .section-padding { padding: 50px 0; }
+
+/* Follow us section */
+.follow-section { margin-bottom: 60px; }
+.follow-section h4 { margin-bottom: 20px; }
+
+.social-icons-lg { font-size: 1.5em; }
+.social-icons-lg a { margin: 0 15px; }
 
 /* ---------------------------------
    RESPONSIVE
 --------------------------------- */
 
 @media only screen and (max-width: 992px) {
-  h1 { font-size: 4em; }
-  h2 { font-size: 3em; }
-  h3 { font-size: 2em; }
+  h1 { font-size: 3em; }
+  h2 { font-size: 2.5em; }
 
   header .top-menu ul.welcome-area { padding: 0; }
   header .top-menu ul.welcome-area > li { border: 0; }
@@ -406,17 +466,15 @@ main { margin-top: 270px; }
 
 @media only screen and (max-width: 767px) {
   p { line-height: 1.4; }
-  h1 { font-size: 3em; }
-  h2 { font-size: 2.5em; }
-  h3 { font-size: 1.8em; }
+  h1 { font-size: 2.5em; }
+  h2 { font-size: 2em; }
+  h3 { font-size: 1.5em; }
 
   .section { padding: 40px 0 10px; }
 
-  header .top-menu ul.welcome-area { display: none; }
+  header .top-menu { display: none; }
   header .right-area { float: none; }
-  header .src-area { float: none; border: 0; display: none; }
-  header .top-menu ul.social-icons { display: none; }
-  header .logo { padding: 10px 0; height: 100px; }
+  header .logo { padding: 10px 0; height: 80px; }
 
   header .main-menu {
     text-align: left;
@@ -434,13 +492,14 @@ main { margin-top: 270px; }
 
   .menu-nav-icon { display: inline-block; }
 
-  main { margin-top: 220px; }
+  .slider-height2 { min-height: 150px; }
 
-  .slider-height2 { min-height: 200px; }
+  .hero-cap h2 { font-size: 1.8em; }
+
+  .social-icons-lg a { margin: 0 10px; }
 }
 
 @media only screen and (max-width: 479px) {
   body { font-size: 14px; }
   .left-area, .right-area { float: none; }
-  main { margin-top: 200px; }
 }

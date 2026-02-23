@@ -8,7 +8,7 @@ email: sppscooters@gmail.com
 collections:
   events:
     output: true
-    permalink: /events/:slug/
+    permalink: /events/:year/:month/:slug/
 
 defaults:
   - scope:

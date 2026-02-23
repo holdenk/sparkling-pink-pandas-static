@@ -12,7 +12,7 @@ permalink: /events/
         <div class="row">
           <div class="col-xl-12">
             <div class="hero-cap text-center">
-              <h2 style="color: white;">Events</h2>
+              <h2>Events</h2>
             </div>
           </div>
         </div>
@@ -39,7 +39,7 @@ permalink: /events/
             {% endfor %}
 
             {% if has_upcoming %}
-            <h3 style="margin-bottom: 30px; color: #333;">Upcoming Events</h3>
+            <h3 class="events-section-heading">Upcoming Events</h3>
 
             {% for event in sorted_events %}
               {% assign event_date = event.date | date: "%Y%m%d" %}
@@ -53,14 +53,14 @@ permalink: /events/
                     <p>{{ event.date | date: "%b %Y" }}</p>
                   </a>
                   {% if event.time %}
-                  <a style="margin-left: 100px;" class="blog_item_date">
+                  <a class="blog_item_date blog_item_date--time">
                     <p>{{ event.time }}</p>
                   </a>
                   {% endif %}
                 </div>
                 {% else %}
-                <div class="blog_item_img" style="background: linear-gradient(135deg, #ff4df0, #ff0099); min-height: 200px; display: flex; align-items: center; justify-content: center; position: relative;">
-                  <i class="fas fa-motorcycle" style="font-size: 4em; color: rgba(255,255,255,0.4);"></i>
+                <div class="blog_item_img event-placeholder-img event-placeholder-img--tall">
+                  <i class="fas fa-motorcycle event-placeholder-icon--lg"></i>
                   <a class="blog_item_date">
                     <h3>{{ event.date | date: "%d" }}</h3>
                     <p>{{ event.date | date: "%b %Y" }}</p>
@@ -81,29 +81,29 @@ permalink: /events/
               {% endif %}
             {% endfor %}
             {% else %}
-            <h3 style="margin-bottom: 15px; color: #333;">Upcoming Events</h3>
-            <p style="margin-bottom: 40px;">No upcoming events scheduled. Check back soon or follow us on social media for announcements!</p>
+            <h3 class="events-section-heading">Upcoming Events</h3>
+            <p class="events-no-upcoming">No upcoming events scheduled. Check back soon or follow us on social media for announcements!</p>
             {% endif %}
 
             <!-- Past Events -->
-            <h3 style="margin-bottom: 30px; margin-top: 40px; padding-top: 30px; border-top: 2px solid #eee; color: #333;">Past Events</h3>
+            <h3 class="events-past-divider">Past Events</h3>
 
             {% for event in sorted_events %}
               {% assign event_date = event.date | date: "%Y%m%d" %}
               {% if event_date < now %}
-              <article class="blog_item" style="opacity: 0.85;">
+              <article class="blog_item event-past">
                 {% if event.image %}
                 <div class="blog_item_img">
                   <img class="card-img rounded-0" src="{{ event.image | relative_url }}" alt="{{ event.title }}">
-                  <a class="blog_item_date" style="background: #888;">
+                  <a class="blog_item_date blog_item_date--past">
                     <h3>{{ event.date | date: "%d" }}</h3>
                     <p>{{ event.date | date: "%b %Y" }}</p>
                   </a>
                 </div>
                 {% else %}
-                <div class="blog_item_img" style="background: linear-gradient(135deg, #999, #666); min-height: 200px; display: flex; align-items: center; justify-content: center; position: relative;">
-                  <i class="fas fa-motorcycle" style="font-size: 4em; color: rgba(255,255,255,0.3);"></i>
-                  <a class="blog_item_date" style="background: #888;">
+                <div class="blog_item_img event-placeholder-img event-placeholder-img--tall event-placeholder-img--past">
+                  <i class="fas fa-motorcycle event-placeholder-icon--lg event-placeholder-icon--past"></i>
+                  <a class="blog_item_date blog_item_date--past">
                     <h3>{{ event.date | date: "%d" }}</h3>
                     <p>{{ event.date | date: "%b %Y" }}</p>
                   </a>
@@ -132,9 +132,15 @@ permalink: /events/
             <aside class="single_sidebar_widget">
               <h3 class="widget_title">Subscribe</h3>
               <p>Add our events to your calendar app:</p>
-              <a href="{{ '/events.ics' | relative_url }}" class="btn btn-2" style="font-size: .8em;">
+              <a href="{{ '/events.ics' | relative_url }}" class="btn btn-2 btn--small">
                 <i class="fas fa-calendar"></i> Subscribe to Calendar
               </a>
+            </aside>
+
+            <aside class="single_sidebar_widget newsletter_widget">
+              <h3 class="widget_title">Join Our Group</h3>
+              <p>Stay up to date on rides and events.</p>
+              <a href="https://groups.google.com/g/SparklingPinkPandas" target="_blank" rel="noopener" class="btn_1 boxed-btn">JOIN GOOGLE GROUP</a>
             </aside>
 
             <aside class="single_sidebar_widget popular_post_widget">

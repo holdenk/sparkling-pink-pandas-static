@@ -12,7 +12,7 @@ permalink: /blog/
         <div class="row">
           <div class="col-xl-12">
             <div class="hero-cap text-center">
-              <h2 style="color: white;">Blog</h2>
+              <h2>Blog</h2>
             </div>
           </div>
         </div>
@@ -55,11 +55,17 @@ permalink: /blog/
               {% endfor %}
             </aside>
 
+            <aside class="single_sidebar_widget newsletter_widget">
+              <h3 class="widget_title">Join Our Group</h3>
+              <p>Stay up to date on rides and events by joining our Google Group.</p>
+              <a href="https://groups.google.com/g/SparklingPinkPandas" target="_blank" rel="noopener" class="btn_1 boxed-btn">JOIN GOOGLE GROUP</a>
+            </aside>
+
             <aside class="single_sidebar_widget">
               <h3 class="widget_title">Connect</h3>
-              <ul style="padding: 0;">
+              <ul class="connect-list">
                 {% for social in site.data.social %}
-                <li style="display: block; margin-bottom: 10px;">
+                <li>
                   <a href="{{ social.url }}" target="_blank" rel="noopener">
                     <i class="{{ social.icon }}"></i> {{ social.name }}
                   </a>

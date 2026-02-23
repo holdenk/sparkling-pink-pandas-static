@@ -11,7 +11,7 @@ title: Home
         <div class="row">
           <div class="col-xl-12">
             <div class="hero-cap text-center">
-              <h2 style="color: white;">Home</h2>
+              <h2>Home</h2>
             </div>
           </div>
         </div>
@@ -20,7 +20,7 @@ title: Home
   </div>
 
   <!-- Events Section -->
-  <div class="container" style="margin-top: 30px;">
+  <div class="container mt-section">
     {% assign now = site.time | date: "%Y%m%d" %}
     {% assign sorted_events = site.events | sort: 'date' | reverse %}
 
@@ -33,22 +33,22 @@ title: Home
     {% endfor %}
 
     {% if upcoming_events.size > 0 %}
-    <h2 class="text-center" style="color: black;">UPCOMING EVENTS</h2>
-    <div class="row" style="margin-top: 20px;">
+    <h2 class="text-center content-heading">UPCOMING EVENTS</h2>
+    <div class="row mt-content">
       {% for event in upcoming_events limit: 3 %}
         {% include event-card.html event=event %}
       {% endfor %}
     </div>
     {% else %}
-    <h2 class="text-center" style="color: black;">RECENT EVENTS</h2>
-    <div class="row" style="margin-top: 20px;">
+    <h2 class="text-center content-heading">RECENT EVENTS</h2>
+    <div class="row mt-content">
       {% for event in sorted_events limit: 3 %}
         {% include event-card.html event=event %}
       {% endfor %}
     </div>
     {% endif %}
 
-    <div class="text-center" style="margin-top: 20px;">
+    <div class="text-center mt-content">
       <a class="btn btn-2" href="{{ '/events' | relative_url }}">VIEW ALL EVENTS</a>
     </div>
   </div>
@@ -59,9 +59,9 @@ title: Home
       <div class="row">
         <div class="col-lg-8 col-md-12">
           <div class="blog-posts">
-            <div class="content-wrap" style="margin-top: 0px;">
+            <div class="content-wrap">
               <div class="entry-header text-center">
-                <h2 class="entry-title" style="color: black;">POSTS</h2>
+                <h2 class="entry-title content-heading">POSTS</h2>
               </div>
             </div>
             <br>
@@ -96,12 +96,18 @@ title: Home
               {% endfor %}
             </aside>
 
+            <aside class="single_sidebar_widget newsletter_widget">
+              <h3 class="widget_title">Join Our Group</h3>
+              <p>Stay up to date on rides and events by joining our Google Group.</p>
+              <a href="https://groups.google.com/g/SparklingPinkPandas" target="_blank" rel="noopener" class="btn_1 boxed-btn">JOIN GOOGLE GROUP</a>
+            </aside>
+
             <aside class="single_sidebar_widget">
               <h3 class="widget_title">Connect</h3>
               <p>Join us on our social channels and stay connected with the community.</p>
-              <ul style="padding: 0;">
+              <ul class="connect-list">
                 {% for social in site.data.social %}
-                <li style="display: block; margin-bottom: 10px;">
+                <li>
                   <a href="{{ social.url }}" target="_blank" rel="noopener">
                     <i class="{{ social.icon }}"></i> {{ social.name }}
                   </a>
@@ -123,7 +129,7 @@ title: Home
         <div class="col-lg-12">
           <div class="video-wrap">
             <div class="play-btn">
-              <a class="popup-video" href="https://www.youtube.com/watch?v=fGy0Sye3ZUQ"><i class="fas fa-play"></i></a>
+              <a class="popup-video" href="https://www.youtube.com/watch?v=XVaJrsZEWqc"><i class="fas fa-play"></i></a>
             </div>
           </div>
         </div>

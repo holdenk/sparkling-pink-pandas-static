@@ -9,8 +9,8 @@
       </a>
     </div>
     {% else %}
-    <div class="blog_item_img" style="background: linear-gradient(135deg, #ff4df0, #ff0099); min-height: 150px; display: flex; align-items: center; justify-content: center; position: relative;">
-      <i class="fas fa-motorcycle" style="font-size: 3em; color: rgba(255,255,255,0.5);"></i>
+    <div class="blog_item_img event-placeholder-img">
+      <i class="fas fa-motorcycle event-placeholder-icon"></i>
       <a class="blog_item_date">
         <h3>{{ event.date | date: "%d" }}</h3>
         <p>{{ event.date | date: "%b" }}</p>

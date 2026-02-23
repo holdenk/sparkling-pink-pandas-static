@@ -5,12 +5,12 @@
 
   <div class="icons">
     <div class="left-area">
-      <a class="btn caegory-btn"><b style="color: white;">by {{ post.author | default: "Admin" }}</b></a>
+      <a class="btn caegory-btn"><b class="author-badge">by {{ post.author | default: "Admin" }}</b></a>
     </div>
   </div>
 
   <p class="date"><em>{{ post.date | date: "%a %d %b %Y" }}</em></p>
-  <h3 class="title"><a href="{{ post.url | relative_url }}"><b class="light-color">{{ post.title }}</b></a></h3>
+  <h3 class="title"><a href="{{ post.url | relative_url }}"><b class="color-dark">{{ post.title }}</b></a></h3>
   <p>{{ post.excerpt | strip_html | truncate: 450 }}</p>
   <br>
   <a class="btn read-more-btn" href="{{ post.url | relative_url }}"><b>READ MORE</b></a>
