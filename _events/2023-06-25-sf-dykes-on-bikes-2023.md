@@ -4,7 +4,6 @@ date: 2023-06-25
 time: "TBD"
 location: "San Francisco Pride"
 description: "Ride with the Sparkling Pink Pandas in the SF Dykes on Bikes contingent at Pride 2023."
-image: /assets/img/gallery/17862284837536539.jpg
 ---
 
 The SF Dykes on Bikes registration is open! If you're riding with the Pandas, make sure to select "Club Participant" when you register.
