@@ -36,6 +36,26 @@ permalink: /about/
   <p>Join our <a href="https://groups.google.com/g/SparklingPinkPandas">Google Group</a> for ride announcements, follow us on <a href="https://www.instagram.com/sparklingpinkpandas/">Instagram</a> and <a href="https://x.com/spp_scooters">X / Twitter</a>, or subscribe to our <a href="/events.ics">events calendar</a>.</p>
 </div>
 
+<div id="membership" class="about-details-cap mb-50">
+  <h4>Becoming a Member</h4>
+
+  <p>Joining the Sparkling Pink Pandas is simple: if you're cool with folks like us, you're welcome to ride with us.</p>
+
+  <p><strong>Step 1:</strong> Join our <a href="https://groups.google.com/g/SparklingPinkPandas">Google Group</a> to hear about upcoming rides.</p>
+  <p><strong>Step 2:</strong> Show up to a ride.</p>
+  <p><strong>Step 3:</strong> That's it. You're one of us.</p>
+
+  <p>There are no dues, no fees, no forms to fill out. Just come ride.</p>
+
+  <p><strong>Earning your patch:</strong> Want a Sparkling Pink Pandas patch? Go on a ride with us and don't drop your bike. If you do drop it, that's ok -- there's always next time!</p>
+
+  <p><strong>What we do:</strong> Group rides around SF and the Bay Area, riding in the SF Pride Parade with Dykes on Bikes, road trips (Borrego Springs, Pacifica Taco Bell runs, and more), community events, and generally having a great time on two wheels.</p>
+
+  <p><strong>Safety gear:</strong> We encourage helmets and proper riding gear on every ride. Part of our mission is improving access to safety gear for trans folks -- if you need help getting set up, reach out and we'll do what we can.</p>
+
+  <p><strong>New to riding?</strong> No worries. We do practice rides, we ride at all levels, and we never leave anyone behind. Everyone starts somewhere.</p>
+</div>
+
 <div class="about-details-cap mb-50">
   <h4>In the Press</h4>
   <p><a href="https://www.ebar.com/news///247522" target="_blank" rel="noopener"><strong>"Resist: SF marches against trans military ban"</strong></a> &mdash; Bay Area Reporter, July 26, 2017</p>
