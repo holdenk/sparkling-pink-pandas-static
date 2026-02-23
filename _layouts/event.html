@@ -85,8 +85,16 @@ layout: default
           <div class="blog_right_sidebar">
             <aside class="single_sidebar_widget">
               <h3 class="widget_title">Upcoming Events</h3>
-              {% assign sorted_events = site.events | sort: 'date' | reverse %}
-              {% for event in sorted_events limit: 5 %}
+              {% assign now = site.time | date: "%Y%m%d" %}
+              {% assign sorted_events = site.events | sort: 'date' %}
+              {% assign upcoming_events = "" | split: "" %}
+              {% for event in sorted_events %}
+                {% assign event_date = event.date | date: "%Y%m%d" %}
+                {% if event_date >= now %}
+                  {% assign upcoming_events = upcoming_events | push: event %}
+                {% endif %}
+              {% endfor %}
+              {% for event in upcoming_events limit: 5 %}
               <div class="media post_item">
                 <div class="media-body">
                   <a href="{{ event.url | relative_url }}"><h3>{{ event.title }}</h3></a>
@@ -94,6 +102,9 @@ layout: default
                 </div>
               </div>
               {% endfor %}
+              {% if upcoming_events.size == 0 %}
+              <p>No upcoming events scheduled.</p>
+              {% endif %}
             </aside>
 
             <aside class="single_sidebar_widget">

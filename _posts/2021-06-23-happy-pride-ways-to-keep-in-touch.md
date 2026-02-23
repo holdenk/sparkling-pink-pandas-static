@@ -9,7 +9,7 @@ Hey friends! Happy Pride from the Sparkling Pink Pandas!
 We wanted to share some ways to stay connected with our community. Check us out on:
 
 - [Facebook](https://www.facebook.com/SparklingPinkPandas/) - Follow our page for updates, photos, and event announcements
-- [Twitter](https://twitter.com/spp_scooters) - Quick updates and community news
+- [X / Twitter](https://x.com/spp_scooters) - Quick updates and community news
 
 We'll try and have some events in July, so stay tuned! Whether you're an experienced rider or just curious about scooters and motorcycles, everyone is welcome.
 
