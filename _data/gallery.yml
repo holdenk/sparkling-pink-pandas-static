@@ -1,13 +1,325 @@
-# Gallery images
-# To add images: place them in assets/img/gallery/ and add an entry here.
-# You can download images from https://x.com/spp_scooters and
-# https://www.instagram.com/sparklingpinkpandas/ then add them below.
-#
-# Example:
-# - image: /assets/img/gallery/ride-photo-1.jpg
-#   caption: "Group ride through the Mission"
-#   date: 2023-06-24
-#
-# - image: /assets/img/gallery/pride-2024.jpg
-#   caption: "Pride 2024 with Dykes on Bikes"
-#   date: 2024-06-29
+# Gallery images from Instagram export and photo archive
+# Fields: image, caption, date, credit_name, credit_url, instagram_url
+
+- image: /assets/img/gallery/10401974_10100912356483317_2585577863402385698_n.jpg
+
+- image: /assets/img/gallery/17885863273053146.jpg
+
+- image: /assets/img/gallery/2013-11-17.jpg
+
+- image: /assets/img/gallery/BRIS2352.jpg
+
+- image: /assets/img/gallery/BRIS2417.jpg
+
+- image: /assets/img/gallery/BRIS2439.jpg
+
+- image: /assets/img/gallery/BRIS2475.jpg
+
+- image: /assets/img/gallery/BRIS2482.jpg
+
+- image: /assets/img/gallery/BRIS2497.jpg
+
+- image: /assets/img/gallery/IMG_0027.jpg
+
+- image: /assets/img/gallery/IMG_0235.jpg
+
+- image: /assets/img/gallery/IMG_0364.jpg
+
+- image: /assets/img/gallery/IMG_0605.jpg
+
+- image: /assets/img/gallery/IMG_0659.jpg
+
+- image: /assets/img/gallery/IMG_0721.jpg
+
+- image: /assets/img/gallery/IMG_0725.jpg
+
+- image: /assets/img/gallery/IMG_0806.jpg
+
+- image: /assets/img/gallery/IMG_0809.jpg
+
+- image: /assets/img/gallery/IMG_0849.jpg
+
+- image: /assets/img/gallery/IMG_0858.jpg
+
+- image: /assets/img/gallery/IMG_0875.jpg
+
+- image: /assets/img/gallery/IMG_0878.jpg
+
+- image: /assets/img/gallery/IMG_0888.jpg
+
+- image: /assets/img/gallery/IMG_0954.jpg
+
+- image: /assets/img/gallery/IMG_1088.jpg
+
+- image: /assets/img/gallery/IMG_1188.jpg
+
+- image: /assets/img/gallery/IMG_1206.jpg
+
+- image: /assets/img/gallery/IMG_1419.jpg
+
+- image: /assets/img/gallery/IMG_1429.jpg
+
+- image: /assets/img/gallery/IMG_1818.jpg
+
+- image: /assets/img/gallery/IMG_1877.jpg
+
+- image: /assets/img/gallery/IMG_1948.jpg
+
+- image: /assets/img/gallery/IMG_2007.jpg
+
+- image: /assets/img/gallery/IMG_20130811_174624.jpg
+
+- image: /assets/img/gallery/IMG_20130813_082414.jpg
+
+- image: /assets/img/gallery/IMG_2032.jpg
+
+- image: /assets/img/gallery/IMG_2036.jpg
+
+- image: /assets/img/gallery/IMG_2038.jpg
+
+- image: /assets/img/gallery/IMG_2305.jpg
+
+- image: /assets/img/gallery/IMG_2310.jpg
+
+- image: /assets/img/gallery/IMG_2599.jpg
+
+- image: /assets/img/gallery/IMG_3179.jpg
+
+- image: /assets/img/gallery/IMG_3426.jpg
+
+- image: /assets/img/gallery/IMG_3670.jpg
+
+- image: /assets/img/gallery/IMG_3672.jpg
+
+- image: /assets/img/gallery/IMG_3681.jpg
+
+- image: /assets/img/gallery/IMG_3732.jpg
+
+- image: /assets/img/gallery/IMG_3739.jpg
+
+- image: /assets/img/gallery/IMG_4008.jpg
+
+- image: /assets/img/gallery/IMG_4116.jpg
+
+- image: /assets/img/gallery/IMG_4149.jpg
+
+- image: /assets/img/gallery/IMG_4169.jpg
+
+- image: /assets/img/gallery/IMG_4180.jpg
+
+- image: /assets/img/gallery/IMG_4332.jpg
+
+- image: /assets/img/gallery/IMG_4359.jpg
+
+- image: /assets/img/gallery/IMG_4394.jpg
+
+- image: /assets/img/gallery/IMG_4408.jpg
+
+- image: /assets/img/gallery/IMG_4414.jpg
+
+- image: /assets/img/gallery/IMG_4663.jpg
+
+- image: /assets/img/gallery/IMG_4678.jpg
+
+- image: /assets/img/gallery/IMG_5113.jpg
+
+- image: /assets/img/gallery/IMG_5133.jpg
+
+- image: /assets/img/gallery/IMG_5436.jpg
+
+- image: /assets/img/gallery/IMG_5565.jpg
+
+- image: /assets/img/gallery/IMG_6948.jpg
+
+- image: /assets/img/gallery/IMG_7929.jpg
+
+- image: /assets/img/gallery/17915759202190963.jpg
+  caption: "Today’s trip to Oakland had other plans."
+  date: 2025-10-07
+  instagram_url: https://www.instagram.com/sparklingpinkpandas/
+
+- image: /assets/img/gallery/18056120177196936.jpg
+  caption: "Our previous trip to Taco Bell! We’ll do another one sooooon"
+  date: 2025-10-01
+  instagram_url: https://www.instagram.com/sparklingpinkpandas/
+
+- image: /assets/img/gallery/17862284837536539.jpg
+  caption: "SF friends join us this Friday at dolo at 3:30 for a bootleg trans march starting around 4:30, bring your protest ban..."
+  date: 2021-06-22
+  instagram_url: https://www.instagram.com/sparklingpinkpandas/
+
+- image: /assets/img/gallery/17924377525191484.jpg
+  caption: "Scooter work day 😀"
+  date: 2018-06-03
+  instagram_url: https://www.instagram.com/sparklingpinkpandas/
+
+- image: /assets/img/gallery/17911516498139785.jpg
+  caption: "So its a little rough due to lack of proper video stabilization but there is a 360 video of last weeks ride -"
+  date: 2018-04-07
+  instagram_url: https://www.instagram.com/sparklingpinkpandas/
+
+- image: /assets/img/gallery/17858412283239538.jpg
+  caption: "Come join the Sparkling Pink Pandas, a queer trans focused scooter club :"
+  date: 2018-03-17
+  instagram_url: https://www.instagram.com/sparklingpinkpandas/
+
+- image: /assets/img/gallery/17858459725232187.jpg
+  caption: "Come join the Sparkling Pink Pandas, a queer trans focused scooter club :"
+  date: 2018-03-17
+  instagram_url: https://www.instagram.com/sparklingpinkpandas/
+
+- image: /assets/img/gallery/17899407418168692.jpg
+  caption: "Getting gas before our mini ride."
+  date: 2018-03-17
+  instagram_url: https://www.instagram.com/sparklingpinkpandas/
+
+- image: /assets/img/gallery/17899583365174757.jpg
+  caption: "Come join the Sparkling Pink Pandas, a queer trans focused scooter club :"
+  date: 2018-03-17
+  instagram_url: https://www.instagram.com/sparklingpinkpandas/
+
+- image: /assets/img/gallery/17927009224064953.jpg
+  caption: "Come join the Sparkling Pink Pandas, a queer trans focused scooter club :"
+  date: 2018-03-17
+  instagram_url: https://www.instagram.com/sparklingpinkpandas/
+
+- image: /assets/img/gallery/17931414298050128.jpg
+  caption: "Come join the Sparkling Pink Pandas, a queer trans focused scooter club :"
+  date: 2018-03-17
+  instagram_url: https://www.instagram.com/sparklingpinkpandas/
+
+- image: /assets/img/gallery/17898795922168917.jpg
+  caption: "Hey folks! The Sparkling Pink Pandas is a queer trans focused scooter group in San Francisco and were always looking ..."
+  date: 2018-03-13
+  instagram_url: https://www.instagram.com/sparklingpinkpandas/
+
+- image: /assets/img/gallery/17906023060190368.jpg
+  caption: "Hey folks! The Sparkling Pink Pandas is a queer trans focused scooter group in San Francisco and were always looking ..."
+  date: 2018-03-13
+  instagram_url: https://www.instagram.com/sparklingpinkpandas/
+
+- image: /assets/img/gallery/17906331820141773.jpg
+  caption: "Hey folks! The Sparkling Pink Pandas is a queer trans focused scooter group in San Francisco and were always looking ..."
+  date: 2018-03-13
+  instagram_url: https://www.instagram.com/sparklingpinkpandas/
+
+- image: /assets/img/gallery/17916824545113153.jpg
+  caption: "Hey folks! The Sparkling Pink Pandas is a queer trans focused scooter group in San Francisco and were always looking ..."
+  date: 2018-03-13
+  instagram_url: https://www.instagram.com/sparklingpinkpandas/
+
+- image: /assets/img/gallery/17917054306108137.jpg
+  caption: "Hey folks! The Sparkling Pink Pandas is a queer trans focused scooter group in San Francisco and were always looking ..."
+  date: 2018-03-13
+  instagram_url: https://www.instagram.com/sparklingpinkpandas/
+
+- image: /assets/img/gallery/17928640024010183.jpg
+  caption: "Hey folks! The Sparkling Pink Pandas is a queer trans focused scooter group in San Francisco and were always looking ..."
+  date: 2018-03-13
+  instagram_url: https://www.instagram.com/sparklingpinkpandas/
+
+- image: /assets/img/gallery/17933233495008183.jpg
+  caption: "Hey folks! The Sparkling Pink Pandas is a queer trans focused scooter group in San Francisco and were always looking ..."
+  date: 2018-03-13
+  instagram_url: https://www.instagram.com/sparklingpinkpandas/
+
+- image: /assets/img/gallery/17872487059180534.jpg
+  caption: "The crew (minus photographer Holden Karau) before our ride from Bernal to Pier 23 and Northbay"
+  date: 2017-09-10
+  instagram_url: https://www.instagram.com/sparklingpinkpandas/
+  credit_name: Holden Karau
+
+- image: /assets/img/gallery/17882682070081949.jpg
+  caption: "Post ride decompression with Eric and the Bears of SF 😀"
+  date: 2017-09-10
+  instagram_url: https://www.instagram.com/sparklingpinkpandas/
+
+- image: /assets/img/gallery/17874414985131380.jpg
+  caption: "Hooked up some lights on Pippi 🛵🐼😀#scooters"
+  date: 2017-09-09
+  instagram_url: https://www.instagram.com/sparklingpinkpandas/
+
+- image: /assets/img/gallery/17872749718145152.jpg
+  caption: "Practice on the Scoots :)"
+  date: 2017-09-08
+  instagram_url: https://www.instagram.com/sparklingpinkpandas/
+
+- image: /assets/img/gallery/17882341774083965.jpg
+  caption: "Our practice ride to the mall where the hello kitty truck is coming 😀"
+  date: 2017-09-08
+  instagram_url: https://www.instagram.com/sparklingpinkpandas/
+
+- image: /assets/img/gallery/17898054973021888.jpg
+  caption: "Pippi parked downtown :)"
+  date: 2017-09-08
+  instagram_url: https://www.instagram.com/sparklingpinkpandas/
+
+- image: /assets/img/gallery/17874098122136458.jpg
+  caption: "Some photos from our last ride."
+  date: 2017-09-06
+  instagram_url: https://www.instagram.com/sparklingpinkpandas/
+
+- image: /assets/img/gallery/17881145647081504.jpg
+  caption: "Quick lunch scooter ride for slurpees #toohot #scooters #7-11life #brands #werecruit"
+  date: 2017-08-31
+  instagram_url: https://www.instagram.com/sparklingpinkpandas/
+
+- image: /assets/img/gallery/17878626220103492.jpg
+  caption: "Slurpees. Also fuck it's cold and this was not the best idea."
+  date: 2017-07-24
+  instagram_url: https://www.instagram.com/sparklingpinkpandas/
+
+- image: /assets/img/gallery/17865083431155199.jpg
+  caption: "Last minute Slurpee quest on the last day of Slurpee week, now the Pandas are ready with 11 free slurpees! #scooters ..."
+  date: 2017-07-19
+  instagram_url: https://www.instagram.com/sparklingpinkpandas/
+
+- image: /assets/img/gallery/17865034399130448.jpg
+  caption: "Sparkling Pink Pandas during Pride Weekend in SF. #sfpride #transmarch #dykemarch #scooters #dykesonbikes"
+  date: 2017-07-08
+  instagram_url: https://www.instagram.com/sparklingpinkpandas/
+
+- image: /assets/img/gallery/17865380491140174.jpg
+  caption: "Sparkling Pink Pandas during Pride Weekend in SF. #sfpride #transmarch #dykemarch #scooters #dykesonbikes"
+  date: 2017-07-08
+  instagram_url: https://www.instagram.com/sparklingpinkpandas/
+
+- image: /assets/img/gallery/17874530842125745.jpg
+  caption: "Sparkling Pink Pandas during Pride Weekend in SF. #sfpride #transmarch #dykemarch #scooters #dykesonbikes"
+  date: 2017-07-08
+  instagram_url: https://www.instagram.com/sparklingpinkpandas/
+
+- image: /assets/img/gallery/17882424418067285.jpg
+  caption: "Sparkling Pink Pandas during Pride Weekend in SF. #sfpride #transmarch #dykemarch #scooters #dykesonbikes"
+  date: 2017-07-08
+  instagram_url: https://www.instagram.com/sparklingpinkpandas/
+
+- image: /assets/img/gallery/17887643365060481.jpg
+  caption: "Come join the Sparkling Pink Pandas, a queer trans focused scooter club :"
+  date: 2017-07-08
+  instagram_url: https://www.instagram.com/sparklingpinkpandas/
+
+- image: /assets/img/gallery/17888087737061282.jpg
+  caption: "Sparkling Pink Pandas during Pride Weekend in SF. #sfpride #transmarch #dykemarch #scooters #dykesonbikes"
+  date: 2017-07-08
+  instagram_url: https://www.instagram.com/sparklingpinkpandas/
+
+- image: /assets/img/gallery/17875260208112641.jpg
+  date: 2017-07-05
+  instagram_url: https://www.instagram.com/sparklingpinkpandas/
+
+- image: /assets/img/gallery/17875414438116350.jpg
+  date: 2017-07-05
+  instagram_url: https://www.instagram.com/sparklingpinkpandas/
+
+- image: /assets/img/gallery/17887086571050836.jpg
+  date: 2017-07-05
+  instagram_url: https://www.instagram.com/sparklingpinkpandas/
+
+- image: /assets/img/gallery/17887470583046901.jpg
+  date: 2017-07-05
+  instagram_url: https://www.instagram.com/sparklingpinkpandas/
+
+- image: /assets/img/gallery/17887785913004352.jpg
+  date: 2017-07-05
+  instagram_url: https://www.instagram.com/sparklingpinkpandas/

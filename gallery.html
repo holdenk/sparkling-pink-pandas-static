@@ -12,7 +12,7 @@ permalink: /gallery/
         <div class="row">
           <div class="col-xl-12">
             <div class="hero-cap text-center">
-              <h2 style="color: white;">Gallery</h2>
+              <h2>Gallery</h2>
             </div>
           </div>
         </div>
@@ -22,21 +22,36 @@ permalink: /gallery/
 
   <!-- Photo Gallery -->
   <div class="container section">
-    <h2 class="text-center" style="color: black; margin-bottom: 30px;">Photos</h2>
+    <h2 class="text-center content-heading">Photos</h2>
+    <p class="text-center section-subtitle mb-section">
+      <a href="https://www.instagram.com/sparklingpinkpandas/" target="_blank" rel="noopener">
+        <i class="fab fa-instagram"></i> Follow us on Instagram
+      </a>
+    </p>
 
     {% if site.data.gallery.size > 0 %}
     <div class="gallery_area">
       <div class="row">
         {% for photo in site.data.gallery %}
-        <div class="col-xl-4 col-md-4 col-sm-6" style="margin-bottom: 20px;">
+        <div class="col-xl-4 col-md-4 col-sm-6 mb-4">
           <div class="single_photography">
             <div class="thumb">
               <a href="{{ photo.image | relative_url }}" class="img-pop-up">
-                <img src="{{ photo.image | relative_url }}" style="height: 250px; object-fit: cover;" alt="{{ photo.caption }}">
+                <img src="{{ photo.image | relative_url }}" class="gallery-img" alt="{{ photo.caption }}" loading="lazy">
               </a>
             </div>
-            {% if photo.caption %}
-            <p style="margin-top: 8px; font-size: .9em; color: #666;">{{ photo.caption }}</p>
+            {% if photo.caption or photo.credit_name or photo.instagram_url %}
+            <div class="gallery-meta">
+              {% if photo.caption %}<p>{{ photo.caption }}</p>{% endif %}
+              {% if photo.credit_name %}
+              <p class="gallery-credit">
+                Photo: {% if photo.credit_url %}<a href="{{ photo.credit_url }}" target="_blank" rel="noopener" class="color-pink">{{ photo.credit_name }}</a>{% else %}{{ photo.credit_name }}{% endif %}
+              </p>
+              {% endif %}
+              {% if photo.instagram_url %}
+              <a href="{{ photo.instagram_url }}" target="_blank" rel="noopener" class="gallery-insta-link"><i class="fab fa-instagram"></i> View on Instagram</a>
+              {% endif %}
+            </div>
             {% endif %}
           </div>
         </div>
@@ -48,9 +63,8 @@ permalink: /gallery/
       <div class="col-12">
         <p>Photos coming soon! In the meantime, check out our photos on social media:</p>
         <p>
-          <a href="https://x.com/spp_scooters" target="_blank" rel="noopener" class="btn btn-2" style="font-size: .8em; margin: 5px;"><i class="fab fa-twitter"></i> X / Twitter</a>
-          <a href="https://www.instagram.com/sparklingpinkpandas/" target="_blank" rel="noopener" class="btn btn-2" style="font-size: .8em; margin: 5px;"><i class="fab fa-instagram"></i> Instagram</a>
-          <a href="https://www.facebook.com/SparklingPinkPandas/" target="_blank" rel="noopener" class="btn btn-2" style="font-size: .8em; margin: 5px;"><i class="fab fa-facebook-f"></i> Facebook</a>
+          <a href="https://www.instagram.com/sparklingpinkpandas/" target="_blank" rel="noopener" class="btn btn-2 btn--small"><i class="fab fa-instagram"></i> Instagram</a>
+          <a href="https://www.facebook.com/SparklingPinkPandas/" target="_blank" rel="noopener" class="btn btn-2 btn--small"><i class="fab fa-facebook-f"></i> Facebook</a>
         </p>
       </div>
     </div>
@@ -59,24 +73,42 @@ permalink: /gallery/
 
   <!-- Video Area -->
   <div class="container section">
-    <h2 class="text-center" style="color: black; margin-bottom: 30px;">Videos</h2>
+    <h2 class="text-center content-heading">Videos</h2>
+    <p class="text-center section-subtitle mb-section">
+      <a href="https://www.youtube.com/channel/UCP71aXbyq56Ynquxq3Gfovw" target="_blank" rel="noopener">
+        <i class="fab fa-youtube"></i> Subscribe on YouTube
+      </a>
+    </p>
     <div class="row">
-      <div class="col-lg-8 offset-lg-2">
-        <div class="video-wrap">
-          <div class="play-btn">
-            <a class="popup-video" href="https://www.youtube.com/watch?v=fGy0Sye3ZUQ"><i class="fas fa-play"></i></a>
-          </div>
+      <div class="col-lg-6 col-md-6 video-grid">
+        <div class="embed-responsive embed-responsive-16by9">
+          <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/XVaJrsZEWqc" allowfullscreen loading="lazy"></iframe>
+        </div>
+      </div>
+      <div class="col-lg-6 col-md-6 video-grid">
+        <div class="embed-responsive embed-responsive-16by9">
+          <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/cq6an3mN8Qo" allowfullscreen loading="lazy"></iframe>
+        </div>
+      </div>
+      <div class="col-lg-6 col-md-6 video-grid">
+        <div class="embed-responsive embed-responsive-16by9">
+          <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/76R_YHo9XZk" allowfullscreen loading="lazy"></iframe>
+        </div>
+      </div>
+      <div class="col-lg-6 col-md-6 video-grid">
+        <div class="embed-responsive embed-responsive-16by9">
+          <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/fGy0Sye3ZUQ" allowfullscreen loading="lazy"></iframe>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="container" style="margin-bottom: 60px;">
+  <div class="container follow-section">
     <div class="text-center">
-      <h4 style="margin-bottom: 20px;">Follow Us</h4>
-      <div class="footer-social" style="font-size: 1.5em;">
+      <h4>Follow Us</h4>
+      <div class="footer-social social-icons-lg">
         {% for social in site.data.social %}
-        <a href="{{ social.url }}" target="_blank" rel="noopener" style="margin: 0 15px;"><i class="{{ social.icon }}"></i></a>
+        <a href="{{ social.url }}" target="_blank" rel="noopener"><i class="{{ social.icon }}"></i></a>
         {% endfor %}
       </div>
     </div>

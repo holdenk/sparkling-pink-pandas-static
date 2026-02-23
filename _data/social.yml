@@ -14,6 +14,10 @@
   url: https://www.youtube.com/channel/UCP71aXbyq56Ynquxq3Gfovw
   icon: fab fa-youtube
 
+- name: Bluesky
+  url: https://bsky.app/
+  icon: fas fa-cloud
+
 - name: Google Group
   url: https://groups.google.com/g/SparklingPinkPandas
   icon: fab fa-google
