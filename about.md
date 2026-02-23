@@ -37,6 +37,12 @@ permalink: /about/
 </div>
 
 <div class="about-details-cap mb-50">
+  <h4>In the Press</h4>
+  <p><a href="https://www.ebar.com/news///247522" target="_blank" rel="noopener"><strong>"Resist: SF marches against trans military ban"</strong></a> &mdash; Bay Area Reporter, July 26, 2017</p>
+  <p>"Led by members of the Sparkling Pink Pandas Scooter Club, about 300 people answered Connor's call by marching down Market Street toward City Hall." Photo credit: Christina DiEdoardo.</p>
+</div>
+
+<div class="about-details-cap mb-50">
   <h4>Get Involved</h4>
   <p>Want to ride with us? Join our <a href="https://groups.google.com/g/SparklingPinkPandas">Google Group</a> to stay up to date on upcoming rides and events, or follow us on <a href="https://www.facebook.com/SparklingPinkPandas/">Facebook</a> and <a href="https://x.com/spp_scooters">X / Twitter</a>.</p>
   <p>You can also subscribe to our <a href="/events.ics">events calendar</a> to get ride notifications directly in your calendar app.</p>

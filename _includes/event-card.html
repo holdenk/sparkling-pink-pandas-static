@@ -2,16 +2,20 @@
   <article class="blog_item event-card">
     {% if event.image %}
     <div class="blog_item_img">
-      <img class="card-img rounded-0" src="{{ event.image | relative_url }}" alt="{{ event.title }}">
-      <a class="blog_item_date">
+      <a href="{{ event.url | relative_url }}">
+        <img class="card-img rounded-0" src="{{ event.image | relative_url }}" alt="{{ event.title }}">
+      </a>
+      <a class="blog_item_date" href="{{ event.url | relative_url }}">
         <h3>{{ event.date | date: "%d" }}</h3>
         <p>{{ event.date | date: "%b" }}</p>
       </a>
     </div>
     {% else %}
     <div class="blog_item_img event-placeholder-img">
-      <i class="fas fa-motorcycle event-placeholder-icon"></i>
-      <a class="blog_item_date">
+      <a href="{{ event.url | relative_url }}">
+        <i class="fas fa-motorcycle event-placeholder-icon"></i>
+      </a>
+      <a class="blog_item_date" href="{{ event.url | relative_url }}">
         <h3>{{ event.date | date: "%d" }}</h3>
         <p>{{ event.date | date: "%b" }}</p>
       </a>
@@ -23,7 +27,7 @@
         <h2>{{ event.title }}</h2>
       </a>
       <p>{{ event.description | default: event.excerpt | strip_html | truncate: 150 }}</p>
-      {% if event.time %}<p><small><i class="fas fa-clock"></i> {{ event.time }}</small></p>{% endif %}
+      <p><small><i class="fas fa-calendar"></i> {{ event.date | date: "%b %d, %Y" }}{% if event.time %} at {{ event.time }}{% endif %}</small></p>
       {% if event.location %}<p><small><i class="fas fa-map-marker-alt"></i> {{ event.location }}</small></p>{% endif %}
     </div>
   </article>
