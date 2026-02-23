@@ -4,7 +4,10 @@ on:
   push:
     branches: ["main"]
     paths:
-      - '_events/**'
+      - '_events/**.md'
+
+permissions:
+  contents: read
 
 jobs:
   detect-and-post:
@@ -13,13 +16,19 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          fetch-depth: 2
+          fetch-depth: 0
           lfs: true
 
       - name: Detect new event files
         id: detect
         run: |
-          NEW_EVENTS=$(git diff --name-only --diff-filter=A HEAD~1 HEAD -- '_events/*.md' || true)
+          # Compare against the pre-push SHA so we catch all commits in the push
+          BEFORE="${{ github.event.before }}"
+          if [ "$BEFORE" = "0000000000000000000000000000000000000000" ] || [ -z "$BEFORE" ]; then
+            echo "Initial push or manual trigger, checking last commit only."
+            BEFORE="HEAD~1"
+          fi
+          NEW_EVENTS=$(git diff --name-only --diff-filter=A "$BEFORE" HEAD -- '_events/*.md' || true)
           if [ -z "$NEW_EVENTS" ]; then
             echo "No new events detected."
             echo "has_new_events=false" >> "$GITHUB_OUTPUT"

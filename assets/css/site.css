@@ -455,6 +455,15 @@ header .main-menu > li > a:hover { background: #eee; }
    RESPONSIVE
 --------------------------------- */
 
+/* Widen container on large desktops */
+@media (min-width: 1400px) {
+  .container { max-width: 1320px; }
+}
+
+@media (min-width: 1600px) {
+  .container { max-width: 1500px; }
+}
+
 @media only screen and (max-width: 992px) {
   h1 { font-size: 3em; }
   h2 { font-size: 2.5em; }

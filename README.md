@@ -150,43 +150,95 @@ events.ics            # iCal feed (auto-generated from events)
 
 ## Deployment
 
-The site auto-deploys to GitHub Pages on push to `main` via GitHub Actions.
-
-### GitHub Repository Setup
-
-1. Go to **Settings > Pages** and set source to **GitHub Actions**
-2. Go to **Settings > Secrets and variables**
-
-### Required Secrets (for social media posting)
-
-These are only needed if you want automatic social media posts when new events are added:
-
-| Secret | Description |
-|--------|-------------|
-| `X_API_KEY` | Twitter/X API consumer key |
-| `X_API_SECRET` | Twitter/X API consumer secret |
-| `X_ACCESS_TOKEN` | Twitter/X access token |
-| `X_ACCESS_SECRET` | Twitter/X access token secret |
-| `BSKY_HANDLE` | Bluesky handle |
-| `BSKY_PASSWORD` | Bluesky app password |
-| `IG_USERNAME` | Instagram username |
-| `IG_PASSWORD` | Instagram password |
-| `SMTP_HOST` | SMTP server for email notifications |
-| `SMTP_PORT` | SMTP port (usually 587) |
-| `SMTP_USERNAME` | SMTP login email |
-| `SMTP_PASSWORD` | SMTP password |
-
-### Optional Variables
-
-| Variable | Default | Description |
-|----------|---------|-------------|
-| `SITE_URL` | `https://sparklingpinkpandas.com` | Base URL for links in posts/emails |
+The site auto-deploys to GitHub Pages on push to `main` via GitHub Actions. When a new event is added, two additional workflows automatically send email notifications and post to social media.
 
 ### GitHub Actions Workflows
 
-- **`jekyll.yml`** - Builds and deploys the site to GitHub Pages on every push to main
-- **`post-social-media.yml`** - Posts to X, Bluesky, and Instagram when a new event is added
-- **`notify-new-event.yml`** - Emails the Google Group when a new event is added
+| Workflow | Trigger | What it does |
+|----------|---------|--------------|
+| `jekyll.yml` | Every push to `main` | Builds the Jekyll site and deploys to GitHub Pages |
+| `notify-new-event.yml` | New `.md` file added to `_events/` | Sends an email to the Google Group |
+| `post-social-media.yml` | New `.md` file added to `_events/` | Posts to X, Bluesky, and Instagram |
+
+### GitHub Pages Setup
+
+1. Go to **Settings > Pages**
+2. Under **Build and deployment > Source**, select **GitHub Actions**
+3. Go to **Settings > Environments** and confirm a `github-pages` environment exists (created automatically after the first deploy)
+
+#### Required Permissions
+
+The `jekyll.yml` workflow needs these token permissions (already configured in the workflow file):
+
+| Permission | Level | Why |
+|------------|-------|-----|
+| `contents` | `read` | Read repo to build the site |
+| `pages` | `write` | Deploy to GitHub Pages |
+| `id-token` | `write` | OIDC token for Pages deployment |
+
+If your repository uses restricted default permissions, go to **Settings > Actions > General > Workflow permissions** and ensure **Read repository contents** is enabled. The `pages` and `id-token` permissions are granted per-workflow in the YAML files.
+
+### Notification Setup
+
+The notification workflows (`notify-new-event.yml` and `post-social-media.yml`) only need `contents: read` permission, which is the default. They use repository secrets for credentials to external services.
+
+All notification secrets are optional -- each platform is skipped gracefully if its credentials are missing. You can enable just the ones you need.
+
+#### Adding Secrets
+
+1. Go to **Settings > Secrets and variables > Actions**
+2. Click **New repository secret**
+3. Add each secret by name and value
+
+#### Email Notifications (Google Group)
+
+| Secret | Description |
+|--------|-------------|
+| `SMTP_HOST` | SMTP server hostname (e.g. `smtp.gmail.com`) |
+| `SMTP_PORT` | SMTP port (typically `587` for STARTTLS) |
+| `SMTP_USERNAME` | Email address to send from |
+| `SMTP_PASSWORD` | SMTP password or app password |
+
+**Gmail setup:** Use `smtp.gmail.com` port `587`. You must generate an [App Password](https://myaccount.google.com/apppasswords) (requires 2FA enabled on the account). Use the app password as `SMTP_PASSWORD`, not your regular Gmail password.
+
+Emails are sent to `SparklingPinkPandas@groups.google.com`. To change the recipient, edit `NOTIFY_TO` in `notify-new-event.yml`.
+
+#### X / Twitter
+
+| Secret | Description |
+|--------|-------------|
+| `X_API_KEY` | API key (consumer key) |
+| `X_API_SECRET` | API secret (consumer secret) |
+| `X_ACCESS_TOKEN` | Access token |
+| `X_ACCESS_SECRET` | Access token secret |
+
+**Setup:** Create a project and app at [developer.x.com](https://developer.x.com). Under your app's **Keys and tokens**, generate all four values. The app needs **Read and Write** permissions.
+
+#### Bluesky
+
+| Secret | Description |
+|--------|-------------|
+| `BSKY_HANDLE` | Your handle (e.g. `sparklingpinkpandas.bsky.social`) |
+| `BSKY_PASSWORD` | App password |
+
+**Setup:** In the Bluesky app, go to **Settings > App Passwords** and create a new app password. Use that as `BSKY_PASSWORD` (not your account password).
+
+#### Instagram
+
+| Secret | Description |
+|--------|-------------|
+| `IG_USERNAME` | Instagram username |
+| `IG_PASSWORD` | Instagram password |
+
+**Note:** Instagram automation uses the unofficial `instagrapi` library. Instagram may challenge logins from new IPs (like GitHub Actions runners). This is the least reliable of the three platforms. If it stops working, the other platforms are unaffected.
+
+#### Optional Variables
+
+Variables are set under **Settings > Secrets and variables > Actions > Variables** tab.
+
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `SITE_URL` | `https://sparklingpinkpandas.com` | Base URL used in notification links |
 
 ## Git LFS
 
