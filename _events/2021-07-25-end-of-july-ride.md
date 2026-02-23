@@ -4,6 +4,7 @@ date: 2021-07-25
 time: "12:30 PM"
 location: "76 Gas Station, 3400 Mission St, San Francisco to Black Bear Diner, Colma"
 description: "Group ride starting from 76 gas station with Slurpee stop, heading to Black Bear Diner in Colma."
+image: /assets/img/gallery/17878626220103492.jpg
 ---
 
 Join us for our End of July ride! We'll be departing from the 76 gas station with the good Slurpee machine at 3400 Mission St.

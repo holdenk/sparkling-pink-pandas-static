@@ -1,6 +1,6 @@
 ---
 title: "SF Dykes on Bikes - Pride 2023"
-date: 2023-06-24
+date: 2023-06-25
 time: "TBD"
 location: "San Francisco Pride"
 description: "Ride with the Sparkling Pink Pandas in the SF Dykes on Bikes contingent at Pride 2023."

@@ -4,6 +4,7 @@ date: 2025-08-31
 time: "TBD"
 location: "San Francisco, CA"
 description: "Long weekend Taco Bell ride! Drop us a message for ride details."
+image: /assets/img/gallery/18056120177196936.jpg
 ---
 
 So long weekend Taco Bell ride Sunday Aug 31st!

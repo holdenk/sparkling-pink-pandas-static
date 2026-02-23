@@ -1,6 +1,6 @@
 ---
 title: "SF Dykes on Bikes - Pride 2024"
-date: 2024-06-29
+date: 2024-06-30
 time: "TBD"
 location: "San Francisco Pride"
 description: "Ride with the Sparkling Pink Pandas in the SF Dykes on Bikes contingent at Pride 2024."

@@ -4,6 +4,7 @@ date: 2021-06-10
 time: "4:00 PM"
 location: "San Francisco, CA"
 description: "Group practice session with electric scooters for riders of all experience levels."
+image: /assets/img/gallery/17872749718145152.jpg
 ---
 
 Come join us as we find some electric scooters and practice on them! This is a great opportunity for riders of all experience levels.
