@@ -36,6 +36,8 @@ It will prompt you for the event details and create the markdown file.
 
 To add an event manually, create a file in `_events/` named `YYYY-MM-DD-event-slug.md`:
 
+The "slug" will end up being part of the URL so if we have two events on the same day pick a different slug :p
+
 ```markdown
 ---
 title: "My Event Title"
