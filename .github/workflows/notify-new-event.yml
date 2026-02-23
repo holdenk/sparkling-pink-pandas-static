@@ -82,11 +82,13 @@ jobs:
               location = meta.get('location', '')
               description = meta.get('description', '')
 
-              # Build slug from filename
+              # Build URL from filename (YYYY-MM-DD-slug.md -> /events/YYYY/MM/slug/)
               filename = os.path.basename(filepath).replace('.md', '')
-              # Remove date prefix (YYYY-MM-DD-)
-              slug = '-'.join(filename.split('-')[3:])
-              event_url = f"{site_url}/events/{slug}/"
+              parts_name = filename.split('-')
+              year = parts_name[0]
+              month = parts_name[1]
+              slug = '-'.join(parts_name[3:])
+              event_url = f"{site_url}/events/{year}/{month}/{slug}/"
 
               # Build email
               subject = f"New SPP Event: {title}"

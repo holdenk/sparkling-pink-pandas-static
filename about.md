@@ -27,7 +27,7 @@ permalink: /about/
   <p>Not at all! We ride everything from 49cc scooters to 1200cc motorcycles and everything in between. If it has two wheels (or three!) and gets you moving, bring it. We've had riders on rental scooters, mopeds, vintage Vespas, sport bikes, and big touring motorcycles. The vibe matters more than the cc's.</p>
 
   <p><strong>I'm new to riding. Can I still join?</strong></p>
-  <p>Absolutely! We love helping new riders get comfortable. We do practice rides, group up so nobody gets left behind, and prioritize safety. Everyone starts somewhere.</p>
+  <p>Absolutely! We love helping new riders get comfortable. Reach out to us so we can recommend a good practice ride for you -- we do group practice rides, make sure nobody gets left behind, and prioritize safety. Everyone starts somewhere.</p>
 
   <p><strong>Where do you ride?</strong></p>
   <p>We're based in San Francisco and ride all over the Bay Area. Past rides have taken us from the Mission to Pacifica for tacos, through the city for Slurpees, up to the North Bay, and everywhere in between. We also ride in the SF Pride Parade with Dykes on Bikes every year.</p>
