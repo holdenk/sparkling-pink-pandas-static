@@ -5,9 +5,14 @@ on:
     branches: ["main"]
     paths:
       - '_events/**.md'
+  workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
+
+concurrency:
+  group: "event-notifications"
+  cancel-in-progress: false
 
 jobs:
   detect-and-notify:
@@ -15,37 +20,17 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - name: Detect new event files
-        id: detect
-        run: |
-          # Compare against the pre-push SHA so we catch all commits in the push
-          BEFORE="${{ github.event.before }}"
-          if [ "$BEFORE" = "0000000000000000000000000000000000000000" ] || [ -z "$BEFORE" ]; then
-            echo "Initial push or manual trigger, checking last commit only."
-            BEFORE="HEAD~1"
-          fi
-          NEW_EVENTS=$(git diff --name-only --diff-filter=A "$BEFORE" HEAD -- '_events/*.md' || true)
-          if [ -z "$NEW_EVENTS" ]; then
-            echo "No new events detected."
-            echo "has_new_events=false" >> "$GITHUB_OUTPUT"
-            exit 0
-          fi
-          echo "has_new_events=true" >> "$GITHUB_OUTPUT"
-          echo "files<<EOF" >> "$GITHUB_OUTPUT"
-          echo "$NEW_EVENTS" >> "$GITHUB_OUTPUT"
-          echo "EOF" >> "$GITHUB_OUTPUT"
 
       - name: Set up Python
-        if: steps.detect.outputs.has_new_events == 'true'
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
 
-      - name: Parse event and send email
-        if: steps.detect.outputs.has_new_events == 'true'
+      - name: Install dependencies
+        run: pip install pyyaml
+
+      - name: Detect and email new events
+        id: notify
         env:
           SMTP_HOST: ${{ secrets.SMTP_HOST }}
           SMTP_PORT: ${{ secrets.SMTP_PORT }}
@@ -54,43 +39,66 @@ jobs:
           NOTIFY_FROM: ${{ secrets.SMTP_USERNAME }}
           NOTIFY_TO: "SparklingPinkPandas@groups.google.com"
           SITE_URL: ${{ vars.SITE_URL || 'https://sparklingpinkpandas.com' }}
-          EVENT_FILES: ${{ steps.detect.outputs.files }}
         run: |
-          pip install pyyaml
-
           python3 << 'PYEOF'
-          import os, yaml, smtplib, glob
+          import os, yaml, smtplib, datetime
           from email.mime.text import MIMEText
           from email.mime.multipart import MIMEMultipart
 
-          event_files = os.environ.get("EVENT_FILES", "").strip().split("\n")
-          if not event_files or event_files == ['']:
-              print("No event files to process")
-              exit(0)
-
-          smtp_host = os.environ["SMTP_HOST"]
-          smtp_port = int(os.environ["SMTP_PORT"])
-          smtp_user = os.environ["SMTP_USERNAME"]
-          smtp_pass = os.environ["SMTP_PASSWORD"]
-          notify_from = os.environ["NOTIFY_FROM"]
-          notify_to = os.environ["NOTIFY_TO"]
+          events_dir = '_events'
           site_url = os.environ["SITE_URL"]
+          today = datetime.date.today()
 
-          for filepath in event_files:
-              filepath = filepath.strip()
-              if not filepath or not os.path.exists(filepath):
+          # Find events that need emailing: no 'emailed' field and date in the future
+          pending = []
+          for filename in sorted(os.listdir(events_dir)):
+              if not filename.endswith('.md'):
                   continue
-
+              filepath = os.path.join(events_dir, filename)
               with open(filepath, 'r') as f:
                   content = f.read()
-
-              # Parse front matter
-              parts = content.split('---', 2)
-              if len(parts) < 3:
+              if not content.startswith('---'):
                   continue
-              meta = yaml.safe_load(parts[1])
-              body = parts[2].strip()
+              close = content.find('\n---', 3)
+              if close == -1:
+                  continue
+              fm_raw = content[3:close]
+              meta = yaml.safe_load(fm_raw) or {}
+              rest = content[close + 4:]
 
+              if meta.get('emailed'):
+                  continue
+              event_date = meta.get('date')
+              if not event_date:
+                  continue
+              if hasattr(event_date, 'date'):
+                  event_date = event_date.date()
+              if event_date < today:
+                  continue
+
+              pending.append((filepath, filename, meta, fm_raw, rest))
+
+          if not pending:
+              print("No events need emailing.")
+              with open(os.environ["GITHUB_OUTPUT"], "a") as f:
+                  f.write("updated=false\n")
+              exit(0)
+
+          smtp_host = os.environ.get("SMTP_HOST", "")
+          smtp_port = os.environ.get("SMTP_PORT", "")
+          smtp_user = os.environ.get("SMTP_USERNAME", "")
+          smtp_pass = os.environ.get("SMTP_PASSWORD", "")
+          notify_from = os.environ.get("NOTIFY_FROM", "")
+          notify_to = os.environ["NOTIFY_TO"]
+
+          if not all([smtp_host, smtp_port, smtp_user, smtp_pass]):
+              print("SMTP credentials not configured, skipping email.")
+              with open(os.environ["GITHUB_OUTPUT"], "a") as f:
+                  f.write("updated=false\n")
+              exit(0)
+
+          updated_any = False
+          for filepath, filename, meta, fm_raw, rest in pending:
               title = meta.get('title', 'New Event')
               date = str(meta.get('date', ''))
               time_str = meta.get('time', '')
@@ -98,8 +106,7 @@ jobs:
               description = meta.get('description', '')
 
               # Build URL from filename (YYYY-MM-DD-slug.md -> /events/YYYY/MM/slug/)
-              filename = os.path.basename(filepath).replace('.md', '')
-              parts_name = filename.split('-')
+              parts_name = filename.replace('.md', '').split('-')
               year = parts_name[0]
               month = parts_name[1]
               slug = '-'.join(parts_name[3:])
@@ -120,8 +127,6 @@ jobs:
 
           {description}
 
-          {body}
-
           View event: {event_url}
 
           --
@@ -138,7 +143,6 @@ jobs:
               if description:
                   html_body += f"<p>{description}</p>"
               html_body += f"""<hr>
-          <p>{body.replace(chr(10), '<br>')}</p>
           <p><a href="{event_url}">View event on our website</a></p>
           <hr>
           <p><em>Sparkling Pink Pandas</em><br>
@@ -152,11 +156,35 @@ jobs:
               msg.attach(MIMEText(text_body, "plain"))
               msg.attach(MIMEText(html_body, "html"))
 
-              with smtplib.SMTP(smtp_host, smtp_port) as server:
-                  server.starttls()
-                  server.login(smtp_user, smtp_pass)
-                  server.sendmail(notify_from, [notify_to], msg.as_string())
+              try:
+                  with smtplib.SMTP(smtp_host, int(smtp_port)) as server:
+                      server.starttls()
+                      server.login(smtp_user, smtp_pass)
+                      server.sendmail(notify_from, [notify_to], msg.as_string())
+                  print(f"Email sent for event: {title}")
+              except Exception as e:
+                  print(f"Error sending email for {title}: {e}")
+                  continue
 
-              print(f"Email sent for event: {title}")
+              # Update frontmatter with emailed date
+              new_fm = fm_raw.rstrip('\n') + f'\nemailed: "{today.isoformat()}"\n'
+              new_content = '---' + new_fm + '---' + rest
+              with open(filepath, 'w') as f:
+                  f.write(new_content)
+              updated_any = True
+              print(f"Marked {filename} as emailed.")
+
+          with open(os.environ["GITHUB_OUTPUT"], "a") as f:
+              f.write(f"updated={'true' if updated_any else 'false'}\n")
 
           PYEOF
+
+      - name: Commit tracking updates
+        if: steps.notify.outputs.updated == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add _events/*.md
+          git diff --cached --quiet && exit 0
+          git commit -m "chore: mark events as emailed [skip ci]"
+          git push

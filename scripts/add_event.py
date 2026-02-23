@@ -5,7 +5,12 @@ Add a new event to the Sparkling Pink Pandas website.
 Creates a properly formatted markdown file in the _events/ directory.
 
 Usage:
-    python3 scripts/add_event.py
+    python3 scripts/add_event.py [--no-notify]
+
+Options:
+    --no-notify  Skip automated notifications (email, social media) for this
+                 event. Use for backdated or historical events that shouldn't
+                 trigger announcements.
 
 You'll be prompted for:
   - Title (required)
@@ -18,6 +23,11 @@ You'll be prompted for:
 
 The script generates a file like:
     _events/2026-03-01-my-event-title.md
+
+Tracking fields (emailed, posted_x, posted_bluesky, posted_instagram) are
+intentionally omitted from new events. Their absence signals to the GitHub
+Actions workflows that the event needs to be announced. Use --no-notify to
+pre-populate these fields with "skip" and prevent notifications.
 """
 
 import os
@@ -58,8 +68,11 @@ def validate_date(date_str):
 
 
 def main():
+    no_notify = '--no-notify' in sys.argv
     print()
     print("=== Add New Event to Sparkling Pink Pandas ===")
+    if no_notify:
+        print("  (--no-notify: this event will NOT trigger notifications)")
     print()
 
     # Title
@@ -137,6 +150,11 @@ def main():
         front_matter.append(f'image: {image}')
     if map_url:
         front_matter.append(f'map_url: "{map_url}"')
+    if no_notify:
+        front_matter.append('emailed: "skip"')
+        front_matter.append('posted_x: "skip"')
+        front_matter.append('posted_bluesky: "skip"')
+        front_matter.append('posted_instagram: "skip"')
     front_matter.append('---')
 
     content = "\n".join(front_matter) + "\n\n" + body + "\n"
