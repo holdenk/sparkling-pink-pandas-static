@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 For events without any photos, find a photo from the gallery that is
-closest in time to the event and assign it as the event's photo.
+closest in time to the event (within 2 days) and assign it as the event's photo.
 
 Usage:
     python3 scripts/assign_gallery_photos.py [--dry-run]
@@ -98,6 +98,9 @@ def main():
             continue
 
         days_diff = abs((closest_date - event_date).days)
+        if days_diff > 2:
+            continue  # no gallery photo within ±2 days of this event
+
         print(f"{'[dry-run] ' if dry_run else ''}Assigning {closest_image} to {filename} "
               f"(closest gallery photo is {days_diff} day(s) away)")
 

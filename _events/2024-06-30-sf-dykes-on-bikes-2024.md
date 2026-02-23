@@ -4,7 +4,6 @@ date: 2024-06-30
 time: "TBD"
 location: "San Francisco Pride"
 description: "Ride with the Sparkling Pink Pandas in the SF Dykes on Bikes contingent at Pride 2024."
-image: /assets/img/gallery/18056120177196936.jpg
 ---
 
 It's that time of year again -- time for SF Pride / Dykes on Bikes!
