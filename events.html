@@ -76,6 +76,9 @@ permalink: /events/
                   {% if event.location %}
                   <p><small><i class="fas fa-map-marker-alt"></i> {{ event.location }}</small></p>
                   {% endif %}
+                  {% if event.map_url or event.map_embed %}
+                  <p><small><a href="{{ event.url | relative_url }}"><i class="fas fa-route"></i> Route map available</a></small></p>
+                  {% endif %}
                 </div>
               </article>
               {% endif %}

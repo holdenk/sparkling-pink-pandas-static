@@ -437,7 +437,18 @@ header .main-menu > li > a:hover { background: #eee; }
 .events-no-upcoming { margin-bottom: 40px; }
 
 /* ---------------------------------
-   12. CONTENT PAGE
+   12. EVENT MAP & ACTIONS
+--------------------------------- */
+
+.event-map { margin-top: 20px; }
+.event-map-embed { border-radius: 4px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+.event-map-embed iframe { display: block; }
+
+.event-actions { margin-top: 25px; padding-top: 20px; border-top: 1px solid #eee; }
+.event-actions .btn { margin-right: 8px; margin-bottom: 8px; }
+
+/* ---------------------------------
+   13. CONTENT PAGE
 --------------------------------- */
 
 .page-content { padding: 40px 0; }
