@@ -24,7 +24,7 @@ layout: default
 }
 </script>
 
-<main>
+<main id="main-content">
   <!-- Hero Area -->
   <div class="slider-area">
     <div class="single-slider slider-height2 d-flex align-items-center slider_area_page">
@@ -70,7 +70,7 @@ layout: default
               <div class="event-map">
                 {% if page.map_embed %}
                 <div class="event-map-embed">
-                  <iframe src="{{ page.map_embed }}" width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                  <iframe class="event-map-iframe" src="{{ page.map_embed }}" width="100%" height="400" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
                 {% endif %}
                 {% if page.map_url %}
