@@ -5,6 +5,7 @@ time: "3:00 PM"
 location: "White Horse Bar 6551 Telegraph Ave"
 description: "Dykes on Bikes Fund Raiser at Whitehorse Bar."
 image: assets/img/gallery/dob_whitehorse_2026.png
+posted_bluesky: "https://bsky.app/profile/sppsf.bsky.social/post/3mfqoo5mmvy23"
 ---
 Come meet people from the Dykes on Bikes and other Queer Motorcycle clubs. You don't have to ride to come here :)
 - Cover $10, Sliding scale - no one turned away
