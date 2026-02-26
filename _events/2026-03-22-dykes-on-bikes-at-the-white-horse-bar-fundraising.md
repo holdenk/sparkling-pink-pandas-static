@@ -12,3 +12,4 @@ Come meet people from the Dykes on Bikes and other Queer Motorcycle clubs. You d
 - 21+, all genders, riders and non-riders are welcome
 - Win fabulous prizes from our supporters
 - Proceeds go to the San Francisco Dykes on Bikes®
+Event goes from 3 to 7
