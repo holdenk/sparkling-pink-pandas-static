@@ -16,3 +16,4 @@
 *.heic filter=lfs diff=lfs merge=lfs -text
 *.heif filter=lfs diff=lfs merge=lfs -text
 *.avif filter=lfs diff=lfs merge=lfs -text
+*.xcf filter=lfs diff=lfs merge=lfs -text
