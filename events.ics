@@ -10,7 +10,8 @@ X-WR-CALNAME:Sparkling Pink Pandas Events
 X-WR-CALDESC:{{ site.description }}
 {% assign sorted_events = site.events | sort: 'date' | reverse %}{% for event in sorted_events %}
 BEGIN:VEVENT
-DTSTART:{{ event.date | date: "%Y%m%dT%H%M%S" }}
+DTSTART;TZID=America/Los_Angeles:{{ event.date | date: "%Y%m%d"}}T{{ event.time | date: "%H%M%S"}}
+DURATION: {{ event.ical_duration | default: "PT3H42S" }}
 SUMMARY:{{ event.title | replace: ",", "\," }}
 DESCRIPTION:{{ event.description | default: event.excerpt | strip_html | strip_newlines | replace: ",", "\," }}
 {% if event.location %}LOCATION:{{ event.location | replace: ",", "\," }}
