@@ -3,7 +3,7 @@ title: "Slurpee Ride"
 date: 2017-07-24
 location: "San Francisco, CA"
 description: "Slurpee run that started at the Castro 7-11 and ended up at the Bernal 7-11."
-image: /assets/img/gallery/17878626220103492.jpg
+image: /assets/img/gallery/17878626220103492.webp
 emailed: "skip"
 posted_x: "skip"
 posted_bluesky: "skip"

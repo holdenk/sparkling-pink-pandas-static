@@ -183,7 +183,7 @@ header .main-menu > li > a:hover { background: #eee; }
 
 .slider_area_hero,
 .slider_area_page {
-  background-image: url('../img/hero1.jpg');
+  background-image: url('../img/hero1.webp');
   box-shadow: inset 0 0 0 2000px rgba(255, 0, 157, 0.5);
 }
 

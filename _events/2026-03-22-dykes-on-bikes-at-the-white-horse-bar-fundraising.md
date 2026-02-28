@@ -4,7 +4,7 @@ date: 2026-03-22
 time: "3:00 PM"
 location: "White Horse Bar 6551 Telegraph Ave"
 description: "Dykes on Bikes Fund Raiser at Whitehorse Bar."
-image: assets/img/gallery/dob_whitehorse_2026.png
+image: assets/img/gallery/dob_whitehorse_2026.webp
 posted_bluesky: "https://bsky.app/profile/sppsf.bsky.social/post/3mfqoo5mmvy23"
 emailed: "2026-02-27"
 duration: "PT4H"
