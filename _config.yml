@@ -34,6 +34,9 @@ plugins:
 
 permalink: /blog/:year/:month/:day/:title/
 
+include:
+  - ".well-known"
+
 exclude:
   - Gemfile
   - Gemfile.lock
