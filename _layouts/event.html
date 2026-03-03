@@ -66,6 +66,13 @@ layout: default
               <p><i class="fas fa-map-marker-alt"></i> {{ page.location }}</p>
               {% endif %}
 
+              {% if page.video_url %}
+              <div class="event-video">
+                <h3>Ride Video</h3>
+                <p><a href="{{ page.video_url }}" target="_blank" rel="noopener"><i class="fas fa-video"></i> Watch Ride Video</a></p>
+              </div>
+              {% endif %}
+
               {% if page.map_embed or page.map_url %}
               <div class="event-map">
                 {% if page.map_embed %}
