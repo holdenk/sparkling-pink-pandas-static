@@ -28,7 +28,7 @@ import re
 import sys
 from datetime import datetime, timezone
 
-import yaml
+from utils import GALLERY_WEB_PREFIX, insert_gallery_dates, load_gallery_yaml
 
 
 def find_json_sidecars(takeout_dir):
@@ -100,14 +100,6 @@ def parse_takeout_date(json_path):
         return None
 
 
-def load_gallery(gallery_path):
-    """Load gallery.yml and return entries list."""
-    if not os.path.exists(gallery_path):
-        print(f"Gallery file not found: {gallery_path}")
-        sys.exit(1)
-    with open(gallery_path, 'r') as f:
-        entries = yaml.safe_load(f) or []
-    return entries
 
 
 def main():
@@ -126,9 +118,12 @@ def main():
     repo_root = os.path.dirname(script_dir)
     gallery_yml = os.path.join(repo_root, '_data', 'gallery.yml')
 
-    web_prefix = "/assets/img/gallery/"
+    web_prefix = GALLERY_WEB_PREFIX
 
-    entries = load_gallery(gallery_yml)
+    entries = load_gallery_yaml(gallery_yml)
+    if not entries:
+        print(f"Gallery file not found or empty: {gallery_yml}")
+        sys.exit(1)
 
     # Find entries missing dates
     missing_dates = []
@@ -204,7 +199,7 @@ def main():
             print(f"  ... and {len(no_date) - 10} more")
 
     if dry_run:
-        print(f"\nDry run complete. Use without --dry-run to apply changes.")
+        print("\nDry run complete. Use without --dry-run to apply changes.")
         return
 
     if not updated:
@@ -212,21 +207,7 @@ def main():
         return
 
     # Write changes by modifying the YAML file
-    with open(gallery_yml, 'r') as f:
-        content = f.read()
-
-    for entry, date, _ in updated:
-        image_line = f"- image: {entry['image']}"
-        date_line = f"  date: {date.isoformat()}"
-        # Insert date line after the image line
-        content = content.replace(
-            image_line + "\n",
-            image_line + "\n" + date_line + "\n",
-            1
-        )
-
-    with open(gallery_yml, 'w') as f:
-        f.write(content)
+    insert_gallery_dates(gallery_yml, [(entry, dt) for entry, dt, _ in updated])
 
     print(f"\nDone. Updated {len(updated)} dates in gallery.yml.")
 

@@ -1,0 +1,15 @@
+[project]
+name = "sparkling-pink-pandas-scripts"
+version = "0.1.0"
+requires-python = ">=3.10"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["scripts"]
+
+[tool.coverage.run]
+source = ["scripts"]
+omit = ["scripts/__pycache__/*"]
+
+[tool.coverage.report]
+show_missing = true

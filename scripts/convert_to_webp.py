@@ -28,6 +28,8 @@ from pathlib import Path
 
 from PIL import Image
 
+from utils import apply_exif_orientation, ensure_rgb, resize_image
+
 
 def parse_args():
     args = {
@@ -63,22 +65,6 @@ def parse_args():
     return args
 
 
-def apply_exif_orientation(img):
-    """Rotate image according to EXIF orientation tag."""
-    try:
-        exif = img.getexif()
-        orientation = exif.get(0x0112)
-        if orientation == 3:
-            img = img.rotate(180, expand=True)
-        elif orientation == 6:
-            img = img.rotate(270, expand=True)
-        elif orientation == 8:
-            img = img.rotate(90, expand=True)
-    except Exception:
-        pass
-    return img
-
-
 def convert_image(src_path, gallery_dir, thumbs_dir, args):
     """Convert a single image to WebP and optionally generate a thumbnail.
 
@@ -92,24 +78,8 @@ def convert_image(src_path, gallery_dir, thumbs_dir, args):
 
     original_size = src_path.stat().st_size
     img = apply_exif_orientation(img)
-    w, h = img.size
-
-    # Resize if larger than max_size
-    max_size = args['max_size']
-    if w > max_size or h > max_size:
-        if w >= h:
-            new_w = max_size
-            new_h = int(h * (max_size / w))
-        else:
-            new_h = max_size
-            new_w = int(w * (max_size / h))
-        img = img.resize((new_w, new_h), Image.Resampling.LANCZOS)
-
-    # Convert to RGB if needed (RGBA/P/LA modes)
-    if img.mode in ('RGBA', 'P', 'LA'):
-        img = img.convert('RGB')
-    elif img.mode != 'RGB':
-        img = img.convert('RGB')
+    img = resize_image(img, args['max_size'])
+    img = ensure_rgb(img)
 
     # Save full-size WebP
     webp_name = src_path.stem + '.webp'
@@ -206,11 +176,7 @@ def convert_hero_image(repo_root, args):
         return None
 
     img = apply_exif_orientation(img)
-
-    if img.mode in ('RGBA', 'P', 'LA'):
-        img = img.convert('RGB')
-    elif img.mode != 'RGB':
-        img = img.convert('RGB')
+    img = ensure_rgb(img)
 
     hero_webp = img_dir / 'hero1.webp'
     img.save(hero_webp, 'WEBP', quality=args['quality'], method=4)

@@ -18,9 +18,15 @@ import os
 import sys
 from datetime import datetime
 
-import yaml
 from PIL import Image
 from PIL.ExifTags import TAGS
+
+from utils import (
+    GALLERY_WEB_PREFIX,
+    gallery_known_images,
+    insert_gallery_dates,
+    load_gallery_yaml,
+)
 
 
 def get_exif_date(filepath):
@@ -49,17 +55,6 @@ def get_exif_date(filepath):
         return None
 
 
-def load_gallery(gallery_path):
-    """Load gallery.yml and return (entries list, set of known image paths)."""
-    if not os.path.exists(gallery_path):
-        return [], set()
-    with open(gallery_path, 'r') as f:
-        entries = yaml.safe_load(f) or []
-    known = set()
-    for entry in entries:
-        if entry and entry.get('image'):
-            known.add(entry['image'])
-    return entries, known
 
 
 def scan_photos(photo_dir):
@@ -94,11 +89,11 @@ def main():
         print(f"Gallery directory not found: {photo_dir}")
         sys.exit(1)
 
-    entries, known_images = load_gallery(gallery_yml)
+    entries = load_gallery_yaml(gallery_yml)
+    known_images = gallery_known_images(entries)
     photos = scan_photos(photo_dir)
 
-    # Web path prefix for gallery images
-    web_prefix = "/assets/img/gallery/"
+    web_prefix = GALLERY_WEB_PREFIX
 
     # Find new photos not in gallery.yml
     new_entries = []
@@ -146,7 +141,7 @@ def main():
         print("\nNo existing entries need date backfill.")
 
     if dry_run:
-        print(f"\nDry run complete. Use without --dry-run to apply changes.")
+        print("\nDry run complete. Use without --dry-run to apply changes.")
         return
 
     if not new_entries and not backfilled:
@@ -165,21 +160,7 @@ def main():
 
     # For backfills, we need to rewrite the relevant lines in the file
     if backfilled:
-        with open(gallery_yml, 'r') as f:
-            content = f.read()
-
-        for entry, date, _ in backfilled:
-            image_line = f"- image: {entry['image']}"
-            date_line = f"  date: {date.isoformat()}"
-            # Insert date line after the image line
-            content = content.replace(
-                image_line + "\n",
-                image_line + "\n" + date_line + "\n",
-                1
-            )
-
-        with open(gallery_yml, 'w') as f:
-            f.write(content)
+        insert_gallery_dates(gallery_yml, [(entry, dt) for entry, dt, _ in backfilled])
 
     total = len(new_entries) + len(backfilled)
     print(f"\nDone. Updated {total} entry/entries in gallery.yml.")

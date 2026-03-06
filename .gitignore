@@ -4,3 +4,13 @@ _site/
 .jekyll-metadata
 vendor/
 .bundle/
+
+# Python
+__pycache__/
+*.pyc
+*.egg-info/
+.coverage
+htmlcov/
+.tox/
+.pytest_cache/
+.ruff_cache/
