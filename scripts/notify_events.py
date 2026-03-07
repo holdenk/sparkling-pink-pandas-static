@@ -17,7 +17,11 @@ import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 
-from utils import build_event_url, parse_event_file, update_event_frontmatter
+from utils import (
+    build_event_url,
+    scan_future_events,
+    update_event_frontmatter,
+)
 
 
 def build_email(meta, event_url, site_url):
@@ -68,28 +72,11 @@ Sparkling Pink Pandas
 
 def find_pending_events(events_dir, today):
     """Find events that need emailing: no 'emailed' field and date >= today."""
-    pending = []
-    for filename in sorted(os.listdir(events_dir)):
-        if not filename.endswith('.md'):
-            continue
-        filepath = os.path.join(events_dir, filename)
-        result = parse_event_file(filepath)
-        if result is None:
-            continue
-        meta, fm_raw, rest = result
-
-        if meta.get('emailed'):
-            continue
-        event_date = meta.get('date')
-        if not event_date:
-            continue
-        if hasattr(event_date, 'date'):
-            event_date = event_date.date()
-        if event_date < today:
-            continue
-
-        pending.append((filepath, filename, meta, fm_raw, rest))
-    return pending
+    return [
+        (filepath, filename, meta, fm_raw, rest)
+        for filepath, filename, meta, fm_raw, rest in scan_future_events(events_dir, today)
+        if not meta.get('emailed')
+    ]
 
 
 def write_gha_output(key, value):

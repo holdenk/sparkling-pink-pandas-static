@@ -16,6 +16,7 @@ from utils import (
     load_gallery_yaml,
     parse_event_file,
     resize_image,
+    scan_future_events,
     slugify,
     update_event_frontmatter,
 )
@@ -155,6 +156,39 @@ class TestUpdateEventFrontmatter:
         assert meta2['emailed'] == '2026-03-06'
         assert meta2['posted_x'] == 'https://x.com/123'
         assert meta2['title'] == 'Test'
+
+
+# --- scan_future_events ---
+
+class TestScanFutureEvents:
+    def test_finds_future_events(self, events_dir):
+        future = date.today().replace(year=date.today().year + 1)
+        write_event_file(events_dir, f'{future.isoformat()}-ride.md', {
+            'title': 'Future Ride',
+            'date': future.isoformat(),
+        })
+        write_event_file(events_dir, '2020-01-01-old.md', {
+            'title': 'Old Event',
+            'date': '2020-01-01',
+        })
+        results = scan_future_events(str(events_dir), date.today())
+        assert len(results) == 1
+        assert results[0][2]['title'] == 'Future Ride'
+
+    def test_empty_dir(self, events_dir):
+        assert scan_future_events(str(events_dir), date.today()) == []
+
+    def test_skips_no_date(self, events_dir):
+        write_event_file(events_dir, '2030-01-01-nodate.md', {
+            'title': 'No Date Event',
+        })
+        results = scan_future_events(str(events_dir), date.today())
+        assert len(results) == 0
+
+    def test_skips_invalid_frontmatter(self, events_dir):
+        path = events_dir / 'bad.md'
+        path.write_text('No front matter here.')
+        assert scan_future_events(str(events_dir), date.today()) == []
 
 
 # --- build_event_url ---

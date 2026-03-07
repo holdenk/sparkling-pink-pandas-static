@@ -15,7 +15,7 @@ Environment variables:
 import datetime
 import os
 
-from utils import build_event_url, parse_event_file, update_event_frontmatter
+from utils import build_event_url, scan_future_events, update_event_frontmatter
 
 
 def build_post_text(meta, url):
@@ -144,23 +144,7 @@ def post_to_instagram(text):
 def find_pending_events(events_dir, today):
     """Find events needing social media posts: missing posted_* fields and date >= today."""
     pending = []
-    for filename in sorted(os.listdir(events_dir)):
-        if not filename.endswith('.md'):
-            continue
-        filepath = os.path.join(events_dir, filename)
-        result = parse_event_file(filepath)
-        if result is None:
-            continue
-        meta, fm_raw, rest = result
-
-        event_date = meta.get('date')
-        if not event_date:
-            continue
-        if hasattr(event_date, 'date'):
-            event_date = event_date.date()
-        if event_date < today:
-            continue
-
+    for filepath, filename, meta, fm_raw, rest in scan_future_events(events_dir, today):
         needs_x = not meta.get('posted_x')
         needs_bsky = not meta.get('posted_bluesky')
         needs_ig = not meta.get('posted_instagram')

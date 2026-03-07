@@ -115,6 +115,34 @@ def insert_gallery_dates(gallery_yml_path, image_date_pairs):
         f.write(content)
 
 
+def scan_future_events(events_dir, today):
+    """Scan _events/ for events with dates >= today.
+
+    Returns list of (filepath, filename, meta, fm_raw, rest).
+    Skips non-.md files and files without valid front matter or dates.
+    """
+    results = []
+    for filename in sorted(os.listdir(events_dir)):
+        if not filename.endswith('.md'):
+            continue
+        filepath = os.path.join(events_dir, filename)
+        result = parse_event_file(filepath)
+        if result is None:
+            continue
+        meta, fm_raw, rest = result
+
+        event_date = meta.get('date')
+        if not event_date:
+            continue
+        if hasattr(event_date, 'date'):
+            event_date = event_date.date()
+        if event_date < today:
+            continue
+
+        results.append((filepath, filename, meta, fm_raw, rest))
+    return results
+
+
 def apply_exif_orientation(img):
     """Rotate image according to EXIF orientation tag."""
     try:
