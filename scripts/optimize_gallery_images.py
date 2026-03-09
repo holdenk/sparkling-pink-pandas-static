@@ -25,6 +25,8 @@ from pathlib import Path
 
 from PIL import Image
 
+from utils import apply_exif_orientation, resize_image
+
 
 def parse_args():
     args = {
@@ -67,34 +69,9 @@ def optimize_image(filepath, max_size, quality):
 
     original_size = os.path.getsize(filepath)
 
-    # Handle EXIF orientation
-    try:
-        exif = img.getexif()
-        orientation = exif.get(0x0112)  # Orientation tag
-        if orientation == 3:
-            img = img.rotate(180, expand=True)
-        elif orientation == 6:
-            img = img.rotate(270, expand=True)
-        elif orientation == 8:
-            img = img.rotate(90, expand=True)
-    except Exception:
-        pass
-
-    w, h = img.size
-
-    # Check if resize is needed
-    needs_resize = w > max_size or h > max_size
-
-    if needs_resize:
-        if w >= h:
-            new_w = max_size
-            new_h = int(h * (max_size / w))
-        else:
-            new_h = max_size
-            new_w = int(w * (max_size / h))
-        img = img.resize((new_w, new_h), Image.Resampling.LANCZOS)
-    else:
-        new_w, new_h = w, h
+    img = apply_exif_orientation(img)
+    img = resize_image(img, max_size)
+    new_w, new_h = img.size
 
     # Convert RGBA/P to RGB for JPEG
     fmt = filepath.suffix.lower()

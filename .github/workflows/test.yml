@@ -1,0 +1,37 @@
+name: Run Tests
+
+on:
+  push:
+    branches: ["main"]
+    paths:
+      - 'scripts/**'
+      - 'tests/**'
+      - 'pyproject.toml'
+      - 'tox.ini'
+  pull_request:
+    paths:
+      - 'scripts/**'
+      - 'tests/**'
+      - 'pyproject.toml'
+      - 'tox.ini'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install tox
+        run: pip install tox
+
+      - name: Run tests with coverage
+        run: tox -e py3
+
+      - name: Run linter
+        run: tox -e lint

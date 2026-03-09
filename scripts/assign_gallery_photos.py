@@ -11,39 +11,10 @@ Options:
 """
 
 import os
-import re
 import sys
 from datetime import date
 
-import yaml
-
-
-def load_gallery(gallery_path):
-    """Load gallery items that have dates."""
-    with open(gallery_path, 'r') as f:
-        gallery = yaml.safe_load(f)
-    dated = []
-    for item in gallery:
-        if item.get('date'):
-            item_date = item['date']
-            if isinstance(item_date, date):
-                dated.append((item['image'], item_date))
-    return dated
-
-
-def parse_event(filepath):
-    """Return (front_matter_dict, raw_fm_block, body_after_close_fence) or None."""
-    with open(filepath, 'r') as f:
-        content = f.read()
-    if not content.startswith('---'):
-        return None
-    close = content.find('\n---', 3)
-    if close == -1:
-        return None
-    fm_raw = content[3:close]
-    fm = yaml.safe_load(fm_raw) or {}
-    rest = content[close + 4:]  # skip '\n---'
-    return fm, fm_raw, rest
+from utils import gallery_dated_photos, load_gallery_yaml, parse_event_file
 
 
 def find_closest_photo(event_date, dated_photos):
@@ -67,7 +38,8 @@ def main():
     gallery_path = os.path.join(repo_root, '_data', 'gallery.yml')
     events_dir = os.path.join(repo_root, '_events')
 
-    dated_photos = load_gallery(gallery_path)
+    entries = load_gallery_yaml(gallery_path)
+    dated_photos = gallery_dated_photos(entries)
     if not dated_photos:
         print("No dated gallery photos found. Nothing to do.")
         return
@@ -78,7 +50,7 @@ def main():
             continue
 
         filepath = os.path.join(events_dir, filename)
-        result = parse_event(filepath)
+        result = parse_event_file(filepath)
         if result is None:
             continue
 

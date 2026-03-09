@@ -31,18 +31,10 @@ pre-populate these fields with "skip" and prevent notifications.
 """
 
 import os
-import re
 import sys
 from datetime import datetime
 
-
-def slugify(text):
-    """Convert text to a URL-friendly slug."""
-    text = text.lower().strip()
-    text = re.sub(r'[^\w\s-]', '', text)
-    text = re.sub(r'[\s_]+', '-', text)
-    text = re.sub(r'-+', '-', text)
-    return text.strip('-')
+from utils import slugify
 
 
 def prompt(label, required=False, default=None):
@@ -171,9 +163,9 @@ def main():
     print()
     print("  Next steps:")
     print(f"    1. Review the file: cat {filepath}")
-    print(f"    2. Build locally:   bundle exec jekyll serve")
+    print("    2. Build locally:   bundle exec jekyll serve")
     print(f"    3. Commit:          git add {filepath} && git commit -m 'Add event: {title}'")
-    print(f"    4. Push:            git push")
+    print("    4. Push:            git push")
     print()
 
 
