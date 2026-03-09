@@ -37,7 +37,7 @@ jobs:
           SMTP_PORT: ${{ secrets.SMTP_PORT }}
           SMTP_USERNAME: ${{ secrets.SMTP_USERNAME }}
           SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
-          NOTIFY_FROM: ${{ vars.NOTIFY_FROM || secrets.NOTIFY_FROM ||  secrets.SMPT_USERNAME }}
+          NOTIFY_FROM: ${{ vars.NOTIFY_FROM || secrets.NOTIFY_FROM || secrets.SMTP_USERNAME }}
           NOTIFY_TO: ${{ vars.NOTIFY_TO || secrets.NOTIFY_TO || 'SparklingPinkPandas@googlegroups.com' }}
           SITE_URL: ${{ vars.SITE_URL || 'https://sparklingpinkpandas.com' }}
         run: python3 scripts/notify_events.py
